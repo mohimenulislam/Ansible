@@ -35,7 +35,11 @@ vi /etc/yum.repos.d/redhat.repo
       name=BaseOS
       baseurl=file:///software/BaseOS
       gpgcheck=0
+
+yum repolist all
+yum list available
 ```
+
 
 
 
