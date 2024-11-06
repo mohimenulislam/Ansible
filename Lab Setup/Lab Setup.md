@@ -40,6 +40,28 @@ yum repolist all
 yum list available
 ```
 
+Install bash completion
+```bash
+yum install bash-completion
+```
 
+### Control node	<br>
+- Host name: controlnode<br>
+- IP: 192.168.11.100<br>
+### Host1
+- Host name: host1
+- IP: 192.168.11.101
+### Host2
+- Host name: host2
+- IP: 192.168.11.102
 
+Set hosts information at controlnode
+```bash
+vi /etc/hosts
+      192.168.11.100  controlnode
+      192.168.11.101  host1	
+      192.168.11.102  host2
+```
+
+Same things do for host1 & host2
 
