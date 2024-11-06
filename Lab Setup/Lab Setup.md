@@ -1,1 +1,3 @@
 
+## Lab Setup
+VMware Workstation 
