@@ -55,6 +55,8 @@ rpm -q ansible-core
 Install Ansible Core
 ```bash
 yum install ansible-core -y      # minimal version
+rpm -q ansible-core            # check
+
 ```
 Check 
 ```bash
@@ -85,3 +87,5 @@ Now check form controlnode
 ```
 ping host1
 ```
+
+Ansible not run as a servie, ansible just give a command line utility
