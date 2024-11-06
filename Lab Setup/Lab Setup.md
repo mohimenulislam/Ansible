@@ -88,4 +88,6 @@ Now check form controlnode
 ping host1
 ```
 
+> [!NOTE]
 Ansible not run as a servie, ansible just give a command line utility
+
