@@ -45,23 +45,43 @@ Install bash completion
 yum install bash-completion
 ```
 
-### Control node	<br>
+Check Ansible installed or not
+```
+rpm -qa | grep ansible
+yum search ansible
+rpm -q ansible-core
+```
+
+Install Ansible Core
+```bash
+yum install ansible-core -y      # minimal version
+```
+Check 
+```bash
+ansible      # press 'tab' button
+ansible --version
+```
+#### Control node	<br>
 - Host name: controlnode<br>
 - IP: 192.168.11.100<br>
-### Host1
+#### Host1
 - Host name: host1
 - IP: 192.168.11.101
-### Host2
+#### Host2
 - Host name: host2
 - IP: 192.168.11.102
 
-Set hosts information at controlnode
+
+Set hosts information at controlnode (As we ping with host name)
 ```bash
 vi /etc/hosts
       192.168.11.100  controlnode
       192.168.11.101  host1	
       192.168.11.102  host2
 ```
-
 Same things do for host1 & host2
 
+Now check form controlnode 
+```
+ping host1
+```
