@@ -8,12 +8,53 @@
 
  ### Configuration File 
 ```bash
-/etc/sudoers  # kono vul input dile o nibe 
+/etc/sudoers  # If we give any wronfg input, it will take. 
 #or
-visudo # recommended 
+visudo # recommended; If we give any wrong input, it will remind us.
 #or
-vi /etc/sudoers.d/<anyname>
+vi /etc/sudoers.d/<anyname>  # The Standard is, whom user we will give sudo privilege, we will create a file according to the user name.
 ```
+
+
+### How we give a user sudo privilege
+- F1 = User or Group <br>
+- F2 = Hosts <br>
+- F3 = User and Group <br>
+- F4 = Commands <br>
+
+F1  F2=(F3)  F4 <br>
+- `pavel ALL=(ALL) ALL`  # by default <br>
+- `pavel host1=(alex) NOPASSWD: /usr/bin/ansitest` <br>
+- `%cisco ALL=(ALL) NOPASSWD: ALL`  # for group 
+
+
+#### Explaination : 
+F1 = Which `user`/`group` we will give sudo privilege <br>
+
+F2 = Here, user `pavel` can be active directory user, this user can login from any other computers. <br>
+     For example: `pavel host1=(ALL) ALL`, it means - `pavel` user can execute all command only from `host1` node. <br>
+     `pavel ALL=(ALL) ALL` it means - `pavel` user can execute all command from all node.<br>
+
+F3 = `pavel ALL=(alex) ALL` - here user `pavel` will run as `alex`  on any system. <br>
+
+F4 = Which command will execute. `pavel ALL=(ALL) /usr/bin/ansitest` - here pavel can execute only `ansitest` command
+
+
+### Some example of sudo permission are given below
+- `pavel ALL=(ALL) ALL` - user `pavel` can login from any `host` as any `user` and execute all `commands`.
+- `pavel ALL=(ALL) NOPASSWD: ALL` - No passward required.
+- `pavel host1=(ALL) ALL` - user `pavel` can login from ony `host1` as any `user` and execute all `commands`.
+- `pavel host1,host5=(ALL) ALL` -  user `pavel` can login from ony `host1` and `host5` as any `user` and execute all `commands`.
+- `pavel ALL=(alex) NOPASSWD: /usr/bin/ansitest ` - user `pavel` can login from any `host` as user `alex` and can execute only `ansitest` command.
+- `pavel ALL=(alex) NOPASSWD: /usr/bin/ansitest, /usr/sbin/useradd` - can execute `ansitest` and `useradd` command.
+- `%cisco ALL=(ALL) NOPASSWD: ALL` - all user of `cisco` group can login from any `host` as any `user` and execute all `commands`.
+
+
+
+
+### Background Study 
+
+
 
 pavel >> useradd >> system dekhbe - pavel <br>
 pavel >> useradd >> system dekhbe - root <br>
@@ -40,21 +81,11 @@ sudo -l #check from user pavel
 
 
  
-F1 = User or Group <br>
-F2 = Hosts <br>
-F3 = User and Group <br>
-F4 = Commands <br>
 
-F1  F2=(F3)  F4  
-
-pavel ALL=
-
-F1 =  <br>
-F2 = ekhane pavel active directory r user o hote pare, active directory r user hole je kono pc theke tar user id, pass de loin korte pare. akhon jodi alex ke sudo privilege dea hoi taile ki se tar nijer machine theke kaj korbe, na bonfhur machine theke kaj korbe na sob machine theke kaj korbe. 
-akhon jodi F1 = pavel, F2 = host5 hoi -- tar mane pavel user ki jodi kokhno sudo privilegemdea hoi and sei machine er nam jodi `host5` hoi taholei sudhu sei command execute korbe. by deafault `ALL` thake. `ALL` = all host. <br>
+ 
 
 
-F3= kon user hisebe switch korbe / ekhane F3= alex hoi ,,, tahole pavel, alex hisebe run korbe je kono system e/  pavel je kono system a run korte parbe as a` alex`hisebe <br>
+
 
 pavel  ALL = alex lptesting1 <br>
 user pavel je kono system a alex hisebe  lptesting1 command  execute korte parbe.
