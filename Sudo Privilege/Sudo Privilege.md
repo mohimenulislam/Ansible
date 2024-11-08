@@ -122,6 +122,7 @@ Give `cisco` group as sudo privilege <br>
 groupadd cisco 
 useradd ccna
 useradd ccnp
+gpasswd -a ccna cisco
 visudo
    # %cisco ALL=(ALL) NOPASSWD: ALL
 ```
