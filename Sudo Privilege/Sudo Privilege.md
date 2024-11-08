@@ -1,9 +1,13 @@
+
 ## Sudo Privilege
 
 > [!NOTE]
 > - `sudo`: super user do
 > - When we try to local user, ansible by default try to sudo privilege. <br>
 > - Sudo like as "Run as administrator"
+> - After sudo privileged, must use `sudo` before command.
+> - If any user is not define in sudo, by default it executed as root. Ex: pavel ALL=`(ALL)` ALL
+
 
 
  ### Configuration File 
@@ -50,6 +54,7 @@ F4 = Which command will execute. `pavel ALL=(ALL) /usr/bin/ansitest` - here pave
 - `%cisco ALL=(ALL) NOPASSWD: ALL`: - from any `host`, all user of `cisco` group can execute all `commands` as any `user`.
 - `pavel  ALL = alex:cisco ALL`: - from any system user `pavel` can execute all commands as a user `alex`, as a group `cisco`
 
+
 #### Check user is sudo privileged or not 
 ```bash
 sudo -l
@@ -57,114 +62,75 @@ sudo -l
 
 ### Background Study 
 
-pavel >> useradd >> system will see - pavel <br>
-pavel >> useradd >> system will see - root <br>
-pavel run as root <br>
- 
+------------------------------------------------
+### Example 1:
+
+Lets try to create a user `alex` from `pavel` user.
+```
+useradd alex
+```
+We can't create `alex` user from pavel because pavel user is not sudo privileged. <br>
+Now give sudo privileged to `pavel` user <br> 
+```bash
+visudo  # from root user
+  # pavel ALL=(ALL) ALL
+```
+
+From pavel user 
+```
+sudo -l
+useradd alex
+```
+Now pavel user able to create a user.
+
+---------------------------------------------------
+### Example 2:
+Create user `alex`
+
 /usr/bin/ansitest <br>
 owner: alex <br>
 execution>>alex <br>
 
-pavel >> /usr/bin/ansitest >> system dekhbe - pavel <br>
-pavel run as alex <br>
+How to give permission user pavel to ansitest as a alex <br>
 
-
-
-```bash
-useradd alex # check from pavel user
-udo useradd alex
-```
-
-
-
-pavel  ALL = alex lptesting1 <br>
-user pavel je kono system a alex hisebe  lptesting1 command  execute korte parbe.
-
-tar mane pavel lptesting1 execute korle system dekhbe seta execute hoyeche alex hisebe
- 
-
-
-
-pavel ALL = alex:ALL lptesting 
-
-
-
-
-```bash
-visudo
-     # pavel  ALL=(ALL)  ALL
-     # pavel ALL=(ALL) NOPASSWD:ALL  # password chaibe na
-     # pavel host5=(ALL) NOPASSWD:ALL
-     # pavel host1,host5=(ALL) NOPASSWD:ALL
-     # pabel host1=(root) NOPASSWD: /usr/bin/ansitest 
-```
-
-
-```bash
-sudo -l # check prom pavel user
-sudo useradd alelx  # without sudo it doesn't work, must be sudo dite hobe 
-```
-
-
+from root user
 ```bash
 vi /usr/bin/ansitest
-       # echo "Welcome to ansible 11"
-ls -l /usr/bin/ansitest # check ownership
+   # echo "welcome to ansible 11"
 chmod u+x /usr/bin/ansitest
-```
-
-
-
-
-```bash
 chown alex:alex /usr/bin/ansitest
 ls -l /usr/bin/ansitest
 
-```
-sudo te kono user er nam define n akorle by default se root hisebe execite hobe 
-
-
-
-
-
-/usr/bin/ansitest <br>
-owner: alex <br>
-execution>>alex <br>
-
-
-How to give permission user pavel to ansitest as a alex <br>
-pavel >> useradd >> system dekhbe - pavel <br>
-pavel >> useradd >> system dekhbe - root <br>
-pavel >> /usr/bin/ansitest >> system dekhbe - pavel <br>
-
-```bash
 visudo
-      #pavel host1=(alex) NOPASSWD: /usr/bin/ansitest
-sudo -u alex ansitest # -u na dile by default root hisebe kal kore 
+      # pavel ALL=(alex) NOPASSWD: /usr/bin/ansitest
 ```
 
+check from pavel user
+```bash
+sudo -u alex ansitest  # here, pavel run as user `alex`.
+```
 
 ----------------------
 
+### Example 3:
 
-
-cisco >> ccna & ccnp >> sudo pr
+Create a group `cisco` from `controlnode` <br> 
+Create user `ccna` & `ccnp` <br>
+Give `cisco` group as sudo privilege <br>
 
 ```bash
-groupadd cisco # from controlnode
+groupadd cisco 
 useradd ccna
 useradd ccnp
 visudo
-   #%cisco  ALL=(ALL)       NOPASSWD: ALL
+   # %cisco ALL=(ALL) NOPASSWD: ALL
 ```
 
+check from user `ccna`
 ```bash
 sudo -l
-sudo ansitest # after joining group logout and login. from user ccna
-
+sudo ansitest # after joining group logout and login
 ```
 
----------------------------------------------------------------------------------------
 
-audit loga sob dekha jai ke kokhon login korse
-!v 
+
