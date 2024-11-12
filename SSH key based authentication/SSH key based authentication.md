@@ -6,7 +6,11 @@ The keys connect users and processes to a server by initiating authentication
 and granting access automatically, so users don't have to remember or enter their password 
 for each and every system. 
 
+#### SSH Key Pair
+- `Public Key` >> Lock
+- `Private Key` >> Key
 
+  
 > [!NOTE]
 > - Controlnode shoud be linux
 > - If an command executed in managed node from controlnode, if the managed node wil be linux it communicate/login through `ssh`, and for windows it communicate through `winrm`.
@@ -57,13 +61,39 @@ firewall-cmd --reload
 
 Generate ssh key Pair (Public and Private key) 
 ```bash
-ssh-keygen 
+ssh-keygen
+
+# A key pair will generate under /root/.ssh
+  # id_rsa     >> private key
+  # id_rsa.pub >> public key
 ```
 
 Copy the public key to server ( ~/.ssh/authorized_keys) 
 ```bash
 ssh-copy-id root@host1  # or
 ssh-copy-id root@192.168.10.131
+
+# this command copy public key(id_rsa.pub) to host machine and save as .ssh/authorized_keys
 ```
 
-Now, we login as `alex` user 
+#### For Security purpose we move private key(id_rsa) in another location 
+```bash
+mv .ssh/id_rsa /opt/           # moved private key to /opt
+mv /opt/id_rsa key             # rename id_rsa to key
+ssh -i /opt/key root@host1     # -i : identity file;
+```
+
+Public key default location 
+```bash
+cat /etc/ssh/sshd_config
+    # AuthorizedKeysFile      .ssh/authorized_keys
+```
+
+Give ownership of id_rsa file to `user1`, so that `user1` can login with key based authentication.
+
+```bash
+cp /root/.ssh/id_rsa /home/user1/    # from root
+chown user1 /home/user1/id_rsa       # from root
+ssh -i /home/user1/id_rsa root@host1 # from user1
+```
+
