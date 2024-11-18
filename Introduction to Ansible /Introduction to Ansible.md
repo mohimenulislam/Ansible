@@ -21,6 +21,7 @@ Ansible uses simple, human-readable scripts called playbooks to automate your ta
 ### Ansible Additional Commands
 
 - `ansible`
+- `ansible --version`
 - `ansible-playbook`
 - `ansible-vault`
 - `ansible-config`
@@ -31,6 +32,7 @@ Ansible uses simple, human-readable scripts called playbooks to automate your ta
 - `ansible-inventory`
 - `ansible-pull`
 
+
 > [!NOTE]
 > - Ansible is agentless, Only control node have to installed python<br>
 > - Ansible can mange - Windows, cisco router, firewall, cloud infrastructure.<br>
@@ -39,6 +41,15 @@ Ansible uses simple, human-readable scripts called playbooks to automate your ta
 > - `Playbooks`: Playbooks are YAML files that orchestrate multiple tasks to automate complex processes.
 > - `Task`: A task is the smallest unit of action you can automate using an Ansible playbook.
 > - `Inventory`: An inventory in Ansible is a list of hosts and groups of hosts that Ansible uses to run commands, modules, and tasks.
+
   
+Ansible configuration file
+```bash
+rpm -qc ansible-core
 
+/etc/ansible/ansible.cfg
+/etc/ansible/hosts    #inventory file
+```
 
+> [!NOTE]
+> We can place ansible configuration file in different four location. 
