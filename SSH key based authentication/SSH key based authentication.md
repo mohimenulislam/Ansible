@@ -68,7 +68,7 @@ ssh-keygen
   # id_rsa.pub >> public key
 ```
 
-Copy the public key to server ( ~/.ssh/authorized_keys) 
+Copy the public key to host1 ( ~/.ssh/authorized_keys) 
 ```bash
 ssh-copy-id root@host1  # or
 ssh-copy-id root@192.168.10.131
@@ -95,5 +95,17 @@ Give ownership of id_rsa file to `user1`, so that `user1` can login with key bas
 cp /root/.ssh/id_rsa /home/user1/    # from root
 chown user1 /home/user1/id_rsa       # from root
 ssh -i /home/user1/id_rsa root@host1 # from user1
+```
+
+> [!WARNING]
+> If ssh-keygen generated, then if root passward will be changed, it doesn't affect on key based authentication. 
+
+Find public key(authorized_keys) in host
+```bash
+find / -iname authorized_keys
+```
+Delete public key from host
+```bash
+find / -iname authorized_keys -exec rm -fr {} \;
 ```
 
