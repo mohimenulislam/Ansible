@@ -31,7 +31,7 @@ Ansible uses simple, human-readable scripts called playbooks to automate your ta
 - `ansible-galaxy`
 - `ansible-inventory`
 - `ansible-pull`
-
+- [root@controlnode ~]# root [press tab] - To see available command 
 
 > [!NOTE]
 > - Ansible is agentless, Only control node have to installed python<br>
