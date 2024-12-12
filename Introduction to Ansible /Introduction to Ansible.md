@@ -1,4 +1,11 @@
 ## Introduction to Ansible
+Ansible automates the management of remote systems and controls their desired state. Ansible environments have three main components:
+
+- `Control node`: A system on which Ansible is installed. You run Ansible commands such as ansible or ansible-inventory on a control node.
+
+- `Inventory`: A list of managed nodes that are logically organized. You create an inventory on the control node to describe host deployments to Ansible.
+
+- `Managed node`: A remote system, or host, that Ansible controls
 
 Ansible provides open-source automation that reduces complexity and runs everywhere. Using Ansible lets you automate virtually any task. Here are some common use cases for Ansible:
 
@@ -33,14 +40,14 @@ Ansible uses simple, human-readable scripts called playbooks to automate your ta
 - `ansible-pull`
 - [root@controlnode ~]# root [press tab] - To see available command 
 
+
+
 > [!NOTE]
 > - Ansible is agentless, Only control node have to installed python<br>
 > - Ansible can mange - Windows, cisco router, firewall, cloud infrastructure.<br>
-> - `Control node`: The machine from which Ansible CLI tools are run. 
-> - `Managed nodes`: The nodes that receive commands and instructions from the control node.
 > - `Playbooks`: Playbooks are YAML files that orchestrate multiple tasks to automate complex processes.
 > - `Task`: A task is the smallest unit of action you can automate using an Ansible playbook.
-> - `Inventory`: An inventory in Ansible is a list of hosts and groups of hosts that Ansible uses to run commands, modules, and tasks.
+
 
   
 Ansible configuration file
