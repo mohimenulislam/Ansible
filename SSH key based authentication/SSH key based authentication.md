@@ -50,8 +50,8 @@ firewall-cmd --reload
 - `Listen` - If have multiple IP, which IP will listen from.
 - ` PermitRootLogin`:- Bydefault `prohibit-password`
   - `prohibit-password`- Root Login deny ,but login by key based authentication. 
-  - `yes` - SSH not allow
-  - `no` -  SSH allow 
+  - `yes` - SSH allow
+  - `no` -  SSH not allow 
 - `AllowUsers` - AllowUser means, speacific user allow & all user is deny. If use `AllowUsers`, don't use `Denyusers`.
   - if `user1` is AllowUsers. Then all others user is denied
 - `Denyusers` - If `user2` is defined as `Denyusers`, then user2 can't SSH to system.
