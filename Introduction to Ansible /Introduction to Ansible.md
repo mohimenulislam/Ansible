@@ -60,3 +60,37 @@ rpm -qc ansible-core
 
 > [!NOTE]
 > We can place ansible configuration file in different four location. 
+
+
+### Building an inventory
+Add host in inventory file 
+`vi /etc/ansible/hosts`
+```bash
+host1
+host2
+```
+
+Check all host from inventory file 
+```bash
+ansible all --list-hosts
+ansible '*' --list-hosts
+```
+Check single host from inventory file
+```bash
+ ansible host1 --list-hosts
+```
+
+We can also add a collection of hosts in `webservers` group
+```bash
+[webservers]
+host1
+host2
+```
+Check host from inventory file by group name
+```bash
+ansible webservers --list-hosts
+```
+
+
+
+  
