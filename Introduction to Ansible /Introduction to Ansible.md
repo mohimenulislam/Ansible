@@ -1,4 +1,4 @@
-## Introduction to Ansible
+## Getting started with Ansible
 Ansible automates the management of remote systems and controls their desired state. Ansible environments have three main components:
 
 - `Control node`: A system on which Ansible is installed. You run Ansible commands such as ansible or ansible-inventory on a control node.
