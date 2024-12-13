@@ -69,29 +69,12 @@ Add host in inventory file
 host1
 host2
 ```
-
-Check all host from inventory file 
-```bash
-ansible all --list-hosts
-ansible '*' --list-hosts
-ansible-inventory --list 
-```
-Check single host from inventory file
-```bash
- ansible host1 --list-hosts
-```
-
 We can also add a collection of hosts in `webservers` group
 ```bash
 [webservers]
 host1
 host2
 ```
-Check host from inventory file by group name
-```bash
-ansible webservers --list-hosts
-```
-
 If we isolate host4 from group
 ```bash
 host4
@@ -104,10 +87,18 @@ host2
 host3
 ```
 
-Check ungrouped host from inventory file 
+Check host from inventory file 
 ```bash
-ansible ungrouped --list-hosts
+ansible all --list-hosts  # Check all host from inventory file 
+ansible '*' --list-hosts  # Check all host from inventory file 
+ansible-inventory --list  # Check all host from inventory file 
+
+ansible host1 --list-hosts       # Check single host from inventory file
+ansible webservers --list-hosts  # Check host from inventory file by group name
+ansible ungrouped --list-hosts   # Check ungrouped host from inventory file
 ```
+
+
 
 
   
@@ -164,7 +155,7 @@ Now we will try `devops` as remote user
 ansible all -m ping -u devops  # if devops user has not sudo privileged, then it will not worked.
 ansible all -m ping -u devops -k
 ansible all -a date -u devops -k
-ansible all -a hwclock -u devops -k # This command will not be executed
+ansible all -a hwclock -u devops -k # if devops user has not sudo privileged, this command will not be executed
 ```
 
 > [!NOTE]
