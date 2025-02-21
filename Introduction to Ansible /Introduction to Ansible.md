@@ -48,10 +48,31 @@ playbook. For an idea of how many modules Ansible includes, take a look at the l
 
 
 ## Tasks
-A task is the smallest unit of action you can automate using an Ansible playbook. Playbooks typically contain a series of tasks that serve a goal, such as to set up a web server, or to deploy an application to remote environments. Ansible executes tasks in the same order they are defined inside a playbook
+A task in Ansible is a single action that gets executed on a managed node. Tasks are defined within a playbook and use Ansible modules to perform operations like installing packages, copying files, managing services, or running commands.
 - The units of action in Ansible.
 - You can execute a single task once with an `ad-hoc` command.
 
+#### Example of task
+```yml
+#  Install a Package (YUM)
+- name: Install Apache
+  ansible.builtin.yum:
+    name: httpd
+    state: present
+
+# Start a Service
+- name: Start Apache
+  ansible.builtin.service:
+    name: httpd
+    state: started
+    enabled: yes
+
+# Execute a Command
+- name: Print hostname
+  ansible.builtin.command: hostname
+
+
+```
  
 ## Playbooks
 An Ansible Playbook is a YAML file that defines a set of automation tasks to be executed on managed nodes. It describes what needs to be done, such as installing packages, configuring services, deploying applications, or managing users. Playbooks use plays, which group tasks and define the hosts they apply to.
