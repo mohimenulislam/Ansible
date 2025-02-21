@@ -1,11 +1,64 @@
-## Getting started with Ansible
-Ansible automates the management of remote systems and controls their desired state. Ansible environments have three main components:
+# Overview of Ansible
+- In one liner "Ansible is a super-simple automation platform that is agentless and extensible."
+- It is an open source tool (with enterprise editions available) developed using Python and runs on linux, Mac, and UNIX-like systems.
 
-- `Control node`: A system on which Ansible is installed. You run Ansible commands such as ansible or ansible-inventory on a control node.
 
-- `Inventory`: A list of managed nodes that are logically organized. You create an inventory on the control node to describe host deployments to Ansible.
+## Ansible Architecture
+- Control node
+- Managed nodes
+- Inventory
+- Modules
+- Tasks Playbooks
 
-- `Managed node`: A remote system, or host, that Ansible controls
+## Control node
+- Any machine with Ansible installed.
+- You can run commands and playbooks, invoking `/usr/bin/ansible or
+/usr/bin/ansible-playbook`, from any control node.
+- You can use any computer that has Python installed on it as a control node - laptops, shared desktops, and servers can all run Ansible.
+- However, you cannot use a Windows machine as a control node.
+- You can have multiple control nodes.
+- Controller node refers this ansible.cfg to connect and work with ansible client nodes.
+- Ansible will use SSH to connect to all the remote servers and executes the tasks in parallel
+
+
+## Managed nodes
+- The network devices (and/or servers) you manage with Ansible.
+- Managed nodes are also sometimes called `hosts`.
+- Ansible is not installed on managed nodes.
+- Since we are not installing any agent or additional software on the client nodes, ansible is referred as agent less
+
+
+
+## Inventory
+- A list of managed nodes.
+- An inventory file is also sometimes called a `hostfile `.
+- Your inventory can specify information like IP address for each managed node.
+- An inventory can also organize managed nodes, creating and nesting groups for easier scaling.
+
+
+
+## Modules
+- Ansible modules are reusable, standalone scripts that can be used by the Ansible API, or by the ansible or ansible-playbook programs
+- Ansible ships with a number of modules (called the module library) that can be executed directly on remote hosts or through playbooks.
+- Tasks in playbooks call modules to do the work.
+- Each module has a particular use, from administering users on a specific type of database to managing VLAN interfaces on a specific type of network device.
+- You can invoke a single module with a task, or invoke several different modules in a
+playbook. For an idea of how many modules Ansible includes, take a look at the list of all modules.
+
+
+
+## Tasks
+A task is the smallest unit of action you can automate using an Ansible playbook. Playbooks typically contain a series of tasks that serve a goal, such as to set up a web server, or to deploy an application to remote environments. Ansible executes tasks in the same order they are defined inside a playbook
+- The units of action in Ansible.
+- You can execute a single task once with an `ad-hoc` command.
+
+ 
+## Playbooks
+An Ansible playbook contains one or multiple plays, each of which define the work to be done for a configuration on a managed server. Ansible plays are written in YAML. Every play is created by an administrator with environment-specific parameters for the target machines; there are no standard plays.
+܀
+- Ordered lists of tasks, saved so you can run those tasks in that order repeatedly.
+- Playbooks can include variables as well as tasks.
+- Playbooks are written in YAML and are easy to read, write, share and understand.
 
 Ansible provides open-source automation that reduces complexity and runs everywhere. Using Ansible lets you automate virtually any task. Here are some common use cases for Ansible:
 
