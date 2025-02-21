@@ -55,7 +55,7 @@ A task is the smallest unit of action you can automate using an Ansible playbook
  
 ## Playbooks
 An Ansible playbook contains one or multiple plays, each of which define the work to be done for a configuration on a managed server. Ansible plays are written in YAML. Every play is created by an administrator with environment-specific parameters for the target machines; there are no standard plays.
-܀
+
 - Ordered lists of tasks, saved so you can run those tasks in that order repeatedly.
 - Playbooks can include variables as well as tasks.
 - Playbooks are written in YAML and are easy to read, write, share and understand.
