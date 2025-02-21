@@ -54,11 +54,34 @@ A task is the smallest unit of action you can automate using an Ansible playbook
 
  
 ## Playbooks
+An Ansible Playbook is a YAML file that defines a set of automation tasks to be executed on managed nodes. It describes what needs to be done, such as installing packages, configuring services, deploying applications, or managing users. Playbooks use plays, which group tasks and define the hosts they apply to.
+
 An Ansible playbook contains one or multiple plays, each of which define the work to be done for a configuration on a managed server. Ansible plays are written in YAML. Every play is created by an administrator with environment-specific parameters for the target machines; there are no standard plays.
 
 - Ordered lists of tasks, saved so you can run those tasks in that order repeatedly.
 - Playbooks can include variables as well as tasks.
 - Playbooks are written in YAML and are easy to read, write, share and understand.
+
+#### Example 
+
+```yml
+---
+- name: Install and start Apache
+  hosts: webservers
+  become: yes  # Run tasks with sudo privileges
+  tasks:
+    - name: Install Apache
+      ansible.builtin.yum:
+        name: httpd
+        state: present
+
+    - name: Start Apache
+      ansible.builtin.service:
+        name: httpd
+        state: started
+        enabled: yes
+
+```
 
 Ansible provides open-source automation that reduces complexity and runs everywhere. Using Ansible lets you automate virtually any task. Here are some common use cases for Ansible:
 
