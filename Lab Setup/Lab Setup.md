@@ -55,15 +55,17 @@ Install bash completion
 yum install bash-completion
 ```
 
-Check Ansible installed or not
+Check Ansible & Python installed or not
 ```
 rpm -qa | grep ansible
+rpm -qa | grep python
 yum search ansible
 rpm -q ansible-core
 ```
 
 Install Ansible Core
 ```bash
+yum search ansible
 yum install ansible-core -y      # minimal version
 rpm -q ansible-core            # check
 
