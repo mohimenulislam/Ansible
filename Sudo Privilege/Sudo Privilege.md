@@ -79,7 +79,7 @@ visudo  # from root user
 From pavel user 
 ```
 sudo -l
-useradd alex
+sudo useradd alex
 ```
 Now pavel user able to create a user.
 
