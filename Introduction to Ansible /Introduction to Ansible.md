@@ -147,7 +147,7 @@ Ansible uses simple, human-readable scripts called playbooks to automate your ta
 
 
   
-Ansible configuration file
+#### Ansible configuration file
 ```bash
 rpm -qc ansible-core
 
@@ -160,19 +160,18 @@ rpm -qc ansible-core
 
 
 ### Building an inventory
-Add host in inventory file 
-`vi /etc/ansible/hosts`
+#### Add host in inventory file `vi /etc/ansible/hosts`
 ```bash
 host1
 host2
 ```
-We can also add a collection of hosts in `webservers` group
+#### We can also add a collection of hosts in `webservers` group
 ```bash
 [webservers]
 host1
 host2
 ```
-If we isolate host4 from group
+#### If we isolate host4 from group
 ```bash
 host4
 
@@ -184,7 +183,7 @@ host2
 host3
 ```
 
-Check host from inventory file 
+#### Check host from inventory file 
 ```bash
 ansible all --list-hosts  # Check all host from inventory file 
 ansible '*' --list-hosts  # Check all host from inventory file 
@@ -195,56 +194,58 @@ ansible webservers --list-hosts  # Check host from inventory file by group name
 ansible ungrouped --list-hosts   # Check ungrouped host from inventory file
 ```
 
-
-
+#### How to clear cache
+```bash
+ansible all -m setup --flush-cache
+```
 
   
 ## Ansible Module
 An Ansible module is a small program that performs actions on a local machine, application programming interface (API), or remote host. Modules are expressed as code, usually in Python, and contain metadata that defines when and where a specific automation task is executed and which users can execute it.
 
-Plugin documentation tool
+#### Plugin documentation tool
 ```bash
 man ansible-doc
 ```
 
-List of all ansible module
+#### List of all ansible module
 ```bash
 ansible-doc -l
 ```
 
-Count all ansible module
+#### Count all ansible module
 ```bash
 ansible-doc -l | wc -l
 ```
 
-### Ping Module 
+#### Ping Module 
 ```bash
 ansible-doc ping
 ansible all -m ping
     # -m: module
 ```
 
-By default, Ansible tries key-based authentication. If `PermitRootLogin no` is set on managed nodes, Ansible will not be able to log in as root via SSH.
+#### By default, Ansible tries key-based authentication. If `PermitRootLogin no` is set on managed nodes, Ansible will not be able to log in as root via SSH.
 ```bash
 vi /etc/ssh/sshd_config.d/01-permitrootlogin.conf
     PermitRootLogin no
 ```
 
-Then, if we try for passwordbase authentication 
+#### Then, if we try for passwordbase authentication 
 ```bash
 ansible --help
 ansible all -m ping --ask-pass
 ansible all -m ping -k
 ```
 
-### Command Module
+#### Command Module
 ```bash
 ansible all -m command -a date
 #or
 ansible all -a date # if there doesn't `-m command` it will be by default command module.
 ```
 
-### For other user
+#### For other user
 We will create `devops` user at host1 and hos2.
 Now we will try `devops` as remote user
 ```bash
@@ -257,7 +258,7 @@ ansible all -a hwclock -u devops -k # if devops user has not sudo privileged, th
 > [!NOTE]
 > `date` command show system date and time, `hwclock` command show BIOS date and time & this command must be executed from sudo privileged user.
 
-give `devops` user sudo privileged for `host1` and `host2`
+#### give `devops` user sudo privileged for `host1` and `host2`
 ```bash
 vi /etc/sudoers.d/devops
   devops ALL=(ALL)  NOPASSWD: ALL
@@ -265,14 +266,14 @@ su - devops
 sudo -l # check sudo privileged
 ```
 
-Then, `hwclock` command will be execute
+#### Then, `hwclock` command will be execute
 ```bash
 ansible all -a hwclock -u devops -k -b
     # -b: become: devops user become as a root
     # ansible --help
 ```
 
-Now, if we use devops as default user
+#### Now, if we use devops as default user
 ```bash
 vi /etc/ansible/ansible.cfg
 
@@ -282,7 +283,7 @@ vi /etc/ansible/ansible.cfg
 
 ansible all -a hwclock -k -b 
 ```
-Remove ask pass & ssh public id copy to devops user.
+#### Remove ask pass & ssh public id copy to devops user.
 ```bash
 ssh-copy-id devops@host1
 ssh-copy-id devops@host2
@@ -290,7 +291,7 @@ ssh-copy-id devops@host2
 ansible all -a hwclock -b
 ```
 
-Remove become
+#### Remove become
 ```bash
 vi /etc/ansible/ansible.cfg
 
