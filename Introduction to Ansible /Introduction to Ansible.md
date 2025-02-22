@@ -224,11 +224,10 @@ ansible all -m ping
     # -m: module
 ```
 
-By default ansible try keybase authentication, 
-if  PermitRootLogin is no
+By default, Ansible tries key-based authentication. If `PermitRootLogin no` is set on managed nodes, Ansible will not be able to log in as root via SSH.
 ```bash
 vi /etc/ssh/sshd_config.d/01-permitrootlogin.conf
-    PermitRootLogin yes
+    PermitRootLogin no
 ```
 
 Then, if we try for passwordbase authentication 
