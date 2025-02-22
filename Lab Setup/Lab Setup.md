@@ -1,5 +1,15 @@
 
 ## Lab Setup
+
+### Types of Ansible 
+- Ansible Community Edition 
+- Red Hat Ansible
+- Ansible-core
+
+![image](https://github.com/mohimenulislam/Ansible/blob/1bd8f79c66275f322f41caba636596bc23ce85ce/Img/ansiblemanagement.png)
+
+
+## Installation 
 VMware Workstation 
 ![image alt](https://github.com/mohimenulislam/Ansible/blob/cf6e821bcb4a33d73a6da8ed9176d9f903781138/Img/vmwareimage.png)
 Or Setting >> CD/DVD >> Browse ISO>> Connect 
