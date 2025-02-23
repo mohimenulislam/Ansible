@@ -187,7 +187,7 @@ host3
 ```bash
 ansible all --list-hosts  # Check all host from inventory file 
 ansible '*' --list-hosts  # Check all host from inventory file 
-ansible-inventory --list  # Check all host from inventory file 
+ansible-inventory --list  # Check all host from inventory file in YAML format
 
 ansible host1 --list-hosts       # Check single host from inventory file
 ansible webservers --list-hosts  # Check host from inventory file by group name
@@ -225,7 +225,7 @@ ansible all -m ping
     # -m: module
 ```
 
-#### By default, Ansible tries key-based authentication. If `PermitRootLogin no` is set on managed nodes, Ansible will not be able to log in as root via SSH.
+#### By default, Ansible tries key-based authentication. If public & private key is not generated & if `PermitRootLogin no` is set on managed nodes, Ansible will not be able to log in as root via SSH.
 ```bash
 vi /etc/ssh/sshd_config.d/01-permitrootlogin.conf
     PermitRootLogin no
