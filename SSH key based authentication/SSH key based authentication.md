@@ -95,7 +95,8 @@ cat /etc/ssh/sshd_config
 #### Change public key location `cat /etc/ssh/sshd_config`
 
 ```bash
-AuthorizedKeysFile      /op/authorized_keys
+# AuthorizedKeysFile path change from .ssh/authorized_keys to /opt/authorized_keys
+AuthorizedKeysFile      /opt/authorized_keys
 
 # move public key to another location
 mv .ssh/authorized_keys /opt/optauthorized_keys 
