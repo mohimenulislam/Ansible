@@ -57,9 +57,12 @@ firewall-cmd --reload
 - `Denyusers` - If `user2` is defined as `Denyusers`, then user2 can't SSH to system.
 - `AllowGroup` - The primary function of AllowGroups is to restrict SSH access to your server based on group membership. Same as `AllowUsers`.
 - `DenyGroup` -  Unlike DenyUsers which blocks individual users, `DenyGroups` applies to entire groups.
+- `PubkeyAuthentication` - By default PubkeyAuthentication is enabled. 
+  -  `yes` -  PubkeyAuthentication will work.
+  -  `no` - PubkeyAuthentication will not work.
 
 
-Generate ssh key Pair (Public and Private key) 
+#### Generate ssh key Pair (Public and Private key) 
 ```bash
 ssh-keygen
 
@@ -68,7 +71,7 @@ ssh-keygen
   # id_rsa.pub >> public key
 ```
 
-Copy the public key to host1 ( ~/.ssh/authorized_keys) 
+#### Copy the public key to host1 ( ~/.ssh/authorized_keys) 
 ```bash
 ssh-copy-id root@host1  # or
 ssh-copy-id root@192.168.10.131
@@ -76,20 +79,29 @@ ssh-copy-id root@192.168.10.131
 # this command copy public key(id_rsa.pub) to host machine and save as .ssh/authorized_keys
 ```
 
-#### For Security purpose we move private key(id_rsa) in another location 
+#### For Security purpose we will move private key(id_rsa) in another location 
 ```bash
 mv .ssh/id_rsa /opt/           # moved private key to /opt
 mv /opt/id_rsa key             # rename id_rsa to key
 ssh -i /opt/key root@host1     # -i : identity file;
 ```
 
-Public key default location 
+#### Public key default location 
 ```bash
 cat /etc/ssh/sshd_config
     # AuthorizedKeysFile      .ssh/authorized_keys
 ```
 
-Give ownership of id_rsa file to `user1`, so that `user1` can login with key based authentication.
+#### Change public key location `cat /etc/ssh/sshd_config`
+
+```bash
+AuthorizedKeysFile      /op/authorized_keys
+
+# move public key to another location
+mv .ssh/authorized_keys /opt/optauthorized_keys 
+```
+
+#### Give ownership of id_rsa file to `user1`, so that `user1` can login with key based authentication.
 
 ```bash
 cp /root/.ssh/id_rsa /home/user1/    # from root
@@ -100,11 +112,11 @@ ssh -i /home/user1/id_rsa root@host1 # from user1
 > [!WARNING]
 > If ssh-keygen generated, then if root passward will be changed, it doesn't affect on key based authentication. 
 
-Find public key(authorized_keys) in host
+#### Find public key(authorized_keys) in host
 ```bash
 find / -iname authorized_keys
 ```
-Delete public key from host
+#### Delete public key from host
 ```bash
 find / -iname authorized_keys -exec rm -fr {} \;
 ```
