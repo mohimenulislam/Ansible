@@ -92,9 +92,12 @@ cat /etc/ssh/sshd_config
     # AuthorizedKeysFile      .ssh/authorized_keys
 ```
 
-#### Change public key location `cat /etc/ssh/sshd_config`
+#### Change public key location `vim /etc/ssh/sshd_config`
 
 ```bash
+# Default location
+AuthorizedKeysFile      .ssh/authorized_keys
+
 # AuthorizedKeysFile path change from .ssh/authorized_keys to /opt/authorized_keys
 AuthorizedKeysFile      /opt/authorized_keys
 
