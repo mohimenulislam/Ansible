@@ -104,25 +104,10 @@ An Ansible playbook contains one or multiple plays, each of which define the wor
 
 ```
 
-Ansible provides open-source automation that reduces complexity and runs everywhere. Using Ansible lets you automate virtually any task. Here are some common use cases for Ansible:
-
-- Eliminate repetition and simplify workflows
-- Manage and maintain system configuration
-- Continuously deploy complex software
-- Perform zero-downtime rolling updates
-
-Ansible uses simple, human-readable scripts called playbooks to automate your tasks. You declare the desired state of a local or remote system in your playbook. Ansible ensures that the system remains in that state.
-
-- `Agent-less architecture`: Low maintenance overhead by avoiding the installation of additional software across IT infrastructure.
-- `Simplicity`: Automation playbooks use straightforward YAML syntax for code that reads like documentation. Ansible is also decentralized, using SSH with existing OS credentials to access to remote machines.
-
-- `Scalability and flexibility`: Easily and quickly scale the systems you automate through a modular design that supports a large range of operating systems, cloud platforms, and network devices.
-
-- `Idempotence and predictability`: When the system is in the state your playbook describes Ansible does not change anything, even if the playbook runs multiple times.
 
 
 
-### Ansible Additional Commands
+## Ansible Additional Commands
 
 - `ansible`
 - `ansible --version`
@@ -147,7 +132,7 @@ Ansible uses simple, human-readable scripts called playbooks to automate your ta
 
 
   
-#### Ansible configuration file
+## Ansible configuration file
 ```bash
 rpm -qc ansible-core
 
@@ -159,7 +144,7 @@ rpm -qc ansible-core
 > We can place ansible configuration file in different four location. 
 
 
-### Building an inventory
+## Building an inventory
 #### Add host in inventory file `vi /etc/ansible/hosts`
 ```bash
 host1
@@ -199,9 +184,7 @@ ansible ungrouped --list-hosts   # Check ungrouped host from inventory file
 ansible all -m setup --flush-cache
 ```
 
-  
-## Ansible Module
-An Ansible module is a small program that performs actions on a local machine, application programming interface (API), or remote host. Modules are expressed as code, usually in Python, and contain metadata that defines when and where a specific automation task is executed and which users can execute it.
+## User Permission using `suso`
 
 #### Plugin documentation tool
 ```bash
@@ -292,17 +275,21 @@ ansible all -a hwclock -b
 ```
 
 #### Remove become
+Go to `vi /etc/ansible/ansible.cfg` file 
+
 ```bash
-vi /etc/ansible/ansible.cfg
+[defaults]
+remote_user=devops
+[privilege_escalation]
+become=true
+become_user=root
+become_method=sudo
+become_ask_pass=false
+```
 
-    [defaults]
-    remote_user=devops
-    [privilege_escalation]
-    become=true
-    become_user=root
-    become_method=sudo
-    become_ask_pass=false
+#### Now run the command
 
+```bash
 ansible all -a hwclock
 ```
 
