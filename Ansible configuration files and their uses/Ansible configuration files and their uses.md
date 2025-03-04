@@ -39,8 +39,8 @@ ansible --version   # from IRIS directory
 #### We can also create ansible.cfg in any other user
 
 ```bash
-useradd devops
-su - devops
+useradd devuser1
+su - devuser1
 ```
 
 Let say we have project named `myproject` and create `ansible.cfg` file under `myproject` directory.
@@ -58,6 +58,10 @@ vi ansible.cfg
 
   [defaults]
   inventory=myhost
+  # or
+  inventory=./myhost  # recommended 
+  # or
+  inventory=/home/devops/myproject/myhost
 ```
 
 We can also create multiple host file 
@@ -65,6 +69,11 @@ We can also create multiple host file
 touch myhost2   # under myproject directory
 ansible all --list-hosts -i myhost2
 ```
+
+```bash
+
+```
+
 
 ## Background Study 
 We know all command in linux are  stored in `/usr/bin` or `/usr/sbin` like `/usr/sbin/useradd`.
