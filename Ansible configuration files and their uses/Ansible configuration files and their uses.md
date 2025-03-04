@@ -43,7 +43,7 @@ useradd devops
 su - devops
 ```
 
-Let say we have project named `myproject` and create `ansible.cfg` file
+Let say we have project named `myproject` and create `ansible.cfg` file under `myproject` directory.
 
 ```bash
 mkdir myproject
@@ -60,7 +60,11 @@ vi ansible.cfg
   inventory=myhost
 ```
 
-
+We can also create multiple host file 
+```bash
+touch myhost2   # under myproject directory
+ansible all --list-hosts -i myhost2
+```
 
 ## Background Study 
 We know all command in linux are  stored in `/usr/bin` or `/usr/sbin` like `/usr/sbin/useradd`.
