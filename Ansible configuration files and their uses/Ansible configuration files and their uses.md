@@ -1,18 +1,30 @@
 # Ansible configuration files and their uses
 
-## Ansible have multiple configuration file location  
+## Ansible has multiple configuration file locations, ordered by priority.
 
 -	Environment Variable (ANSIBLE_CONFIG=)
 -	Current working directory (From where you are providing the ansible command)
--	Home Directory of user 
+-	Home Directory of user (~/.ansible.cfg)
 -	/etc/ansible/ansible.cfg
+
+## Environment Variable (ANSIBLE_CONFIG=)
+
+We can define `ansible.cfg` in environment variable.
+From Controlnode
+```bash
+touch /opt/ansible.cfg
+ANSIBLE_CONFIG=/opt/ansible.cfg
+export ANSIBLE_CONFIG
+env | grep -i ansible.cfg
+ansible --version 
+```
 
 
 ## Current working directory
 
 Suppose we have two projects named `IRIS` and `DBSS`. We can create an `ansible.cfg` file under this directory.
 
-Lets Create two directory from controlnode 
+#### Lets Create two directory from controlnode 
 ```bash
 mkdir IRIS
 mkdir DBSS
@@ -21,3 +33,59 @@ cd IRIS
 touch ansible.cfg
 ansible --version   # from IRIS directory
 ```
+
+![image](https://github.com/mohimenulislam/Ansible/blob/d52758485aca0e80c7658a2e9eda573846a4b8e2/Img/Current%20working%20directory.png)
+
+#### We can also create ansible.cfg in any other user
+
+```bash
+useradd devops
+su - devops
+```
+
+Let say we have project named `myproject` and create `ansible.cfg` file
+
+```bash
+mkdir myproject
+cd myproject
+touch ansible.cfg
+```
+Define host file 
+
+```bash
+touch myhost    # under myproject directory
+vi ansible.cfg
+
+  [defaults]
+  inventory=myhost
+```
+
+
+
+## Background Study 
+We know all command in linux are  stored in `/usr/bin` or `/usr/sbin` like `/usr/sbin/useradd`.
+### How Does the Shell Find useradd?
+```bash
+which useradd
+```
+
+### How Does the Shell Know Where to Find useradd?
+
+When you type a command (e.g., `useradd`), the shell doesn’t magically know where it is—it searches for it using the `$PATH` environment variable.
+
+### What is $PATH?
+
+- `$PATH` is an environment variable that contains a list of directories separated by colons (`:`).
+- The shell searches these directories in order to find the command you entered.
+- You can check your $PATH with:
+
+```bash
+echo $PATH
+```
+ 
+### Example output:
+
+```bash
+/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
+```
+This means the shell will look for commands in these directories, in this order.
