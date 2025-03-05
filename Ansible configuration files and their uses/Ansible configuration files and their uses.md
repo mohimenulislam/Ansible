@@ -73,15 +73,22 @@ ansible all --list-hosts -i myhost2
 ```
 
 Run the conmmand
-
 ```bash
 ansible all -m ping 
 ```
 ![image](https://github.com/mohimenulislam/Ansible/blob/4e4396e910b9d3ca7d36c9148f131acc22c26421/Img/devuser1.png)
 
 ```bash
-vi myproject/ansible/cfg
+vi myproject/ansible.cfg
+
+  [defaults]
+  inventory=./inventory
+  remote_user=devops
+
+ansible all -m ping
 ```
+![image](https://github.com/mohimenulislam/Ansible/blob/20ed9ff52f1d580fd4ec1343ae1e1136d0a16929/Img/devopsuser.png)
+
 
 ## Background Study 
 We know all command in linux are  stored in `/usr/bin` or `/usr/sbin` like `/usr/sbin/useradd`.
