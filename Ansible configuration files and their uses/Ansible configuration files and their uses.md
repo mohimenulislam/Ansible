@@ -123,7 +123,7 @@ vi myproject/ansible.cfg
   become_ask_pass=false
 ```
 
-## Change SSH port change 
+## Change `SSH` port 
 
 ### Step 
 - Change port to /etc/ssh/sshd_config file
@@ -168,6 +168,27 @@ ssh root@192.168.0.102 -p 29
 # or
 ssh devops@192.168.0.102 -p 29
 ```
+
+```bash
+ansible all -m ping
+```
+![image](https://github.com/mohimenulislam/Ansible/blob/584401c681ed6b1abde902ab44a9830cabbfeb84/Img/sshportchange.png)
+
+
+```bash
+vi myproject/myhost
+
+  [webserver]
+  host1
+  host2 ansible_port=29
+```
+
+```bash
+ansible all -m ping
+```
+![image](https://github.com/mohimenulislam/Ansible/blob/909d8420de2204aae1cb337204ea0e1184135b04/Img/port29.png)
+
+### If `host2` says that the devops user is not allowed...
 
 
 
