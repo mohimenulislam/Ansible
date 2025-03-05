@@ -286,3 +286,10 @@ echo $PATH
 /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
 ```
 This means the shell will look for commands in these directories, in this order.
+
+
+### How multiple user work with ansible
+- Create a group
+- Create a common directory
+- Change directiry ownership (group)
+- User add to group 
