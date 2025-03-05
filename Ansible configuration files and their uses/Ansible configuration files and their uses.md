@@ -98,6 +98,20 @@ ansible all -m ping
 ```
 ![image](https://github.com/mohimenulislam/Ansible/blob/e2c738b3a09ed185048bb32cd95454313dd6aa0b/Img/ping.png)
 
+```bash
+ansible all -a hwclock
+ansible all -a hwclock -vvv
+```
+![image](https://github.com/mohimenulislam/Ansible/blob/03fbe334fa9291b9d4edb0c044a095e30335fa44/Img/hwclock.png)
+
+
+```bash
+vi myproject/ansible.cfg
+
+  [privilege_escalation]
+  become=true
+```
+
 ## Background Study 
 We know all command in linux are  stored in `/usr/bin` or `/usr/sbin` like `/usr/sbin/useradd`.
 ### How Does the Shell Find useradd?
