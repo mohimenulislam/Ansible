@@ -87,8 +87,16 @@ vi myproject/ansible.cfg
 
 ansible all -m ping
 ```
-![image](https://github.com/mohimenulislam/Ansible/blob/20ed9ff52f1d580fd4ec1343ae1e1136d0a16929/Img/devopsuser.png)
+![image](https://github.com/mohimenulislam/Ansible/blob/c629d2ac497517e62d2984f2f8ef8dc50b165220/Img/devops_user.png)
 
+From Controlnode, devuser1
+```bash
+ssh-keygen
+ssh-copy-id devops@host1
+ssh-copy-id devops@host2
+ansible all -m ping
+```
+![image](https://github.com/mohimenulislam/Ansible/blob/e2c738b3a09ed185048bb32cd95454313dd6aa0b/Img/ping.png)
 
 ## Background Study 
 We know all command in linux are  stored in `/usr/bin` or `/usr/sbin` like `/usr/sbin/useradd`.
