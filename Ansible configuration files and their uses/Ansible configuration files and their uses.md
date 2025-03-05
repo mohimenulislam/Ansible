@@ -188,7 +188,47 @@ ansible all -m ping
 ```
 ![image](https://github.com/mohimenulislam/Ansible/blob/909d8420de2204aae1cb337204ea0e1184135b04/Img/port29.png)
 
-### If `host2` says that the devops user is not allowed...
+### If `host2` says that the `devops` user is not allowed...
+
+Create a user name `pavel` and give sudo preveliged (From `host2`)
+```bash
+userdel devops
+useradd pavel
+passwd pavel   # host1 devops user and host2 pavel user password will be same
+vi /etc/sudoers.d/sudo_test
+
+  pavel ALL=(ALL) NOPASSWD: ALL
+
+su - pavel
+sudo -l
+```
+We can see `devuser1` try to connect by `devops` user
+```bash
+ansible all -m ping
+```
+
+![image](https://github.com/mohimenulislam/Ansible/blob/de5a69f2445c88ba056e8aebdca93f9a00805775/Img/devopsuserdelete.png)
+
+Change the user of `host2` from controlnode (`ansible_user=pavel`)
+
+```bash
+vi myproject/myhost
+
+  [webserver]
+  host1
+  host2 ansible_port=29 ansible_user=pavel
+
+ssh-copy-id -o port=29 pavel@host2
+ansible all -m ping
+```
+![image](https://github.com/mohimenulislam/Ansible/blob/909d8420de2204aae1cb337204ea0e1184135b04/Img/port29.png)
+
+
+
+
+
+
+
 
 
 
@@ -196,6 +236,10 @@ ansible all -m ping
 ```bash
 ssh-copy-id -o port=29 pavel@host2
 ```
+
+
+
+
 
 ## Background Study 
 We know all command in linux are  stored in `/usr/bin` or `/usr/sbin` like `/usr/sbin/useradd`.
