@@ -19,6 +19,15 @@ env | grep -i ansible.cfg
 ansible --version 
 ```
 
+Afer logout it will gone
+To permanent
+```
+export ANSIBLE_CONFIG=/opt/ansible.cfg
+source .bashrc
+ansible --version
+```
+![image](https://github.com/mohimenulislam/Ansible/blob/d1bb3fcfa056594fa024c15311c40946937a5063/Img/bashrcansible.png)
+
 
 ## Current working directory
 
@@ -226,15 +235,24 @@ ansible all -m ping
 
 
 
-
-
-
-
-
-
 ### After changing the SSH port from 22 to 29 in `host2, if you try ssh-copy-id from the control node...
 ```bash
 ssh-copy-id -o port=29 pavel@host2
+```
+
+### For Windows machine manage 
+Must python winrm to be installed in controlnode, and winrm need to install in windows machine
+Suppose `host3` is a windows machine
+
+```bash
+vi myproject/myhost
+
+  [webserver]
+  host1
+  host2 ansible_port=29 ansible_user=pavel
+  host3 ansible_connection=winrm ansible_user=administrator ansible_password=redhat321
+
+rpm -qa | grep winrm
 ```
 
 
