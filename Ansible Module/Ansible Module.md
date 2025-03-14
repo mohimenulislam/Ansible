@@ -66,7 +66,7 @@ ansible host1 -m command -a "ls -lrth /root"
   - ControlNode to ManageHost2 (copy moduke)
 
 
-backup, content, follow, mode, owner,
+#### Uses of src, dest
 
 ```bash
 ansible host1 -m copy -a "content=welcome dest=/opt/content.demo"
@@ -75,6 +75,37 @@ ansible host1 -m copy -a "content='welcome to LP' dest=/opt/content.demo"
 ansible host1 -m copy -a "src=/home/devuser1/copy.txt dest=/opt/"
 ansible host1 -m copy -a "src=/home/devuser1/copy.txt dest=/opt/copy2.txt"
 ansible host1 -m copy -a "src=/home/devuser1/copy.txt dest=/opt/copy3.txt owner=devops group=wheel mode=666"
+```
+
+#### Copy from `controlNode` to `host1`
+
+```bash
+ ansible host1 -m copy -a "src=/dhaka dest=/opt/"
+
+ansible host1 -m copy -a "src=/dhaka/file1 dest=/root/backup/"  # If the backup directory does not exist, it will be created.
+
+ansible host1 -m copy -a "src=/dhaka/file1 dest=/root/backup" # If the backup directory does not exist, file1 will be saved as a backup.
+```
+
+#### Copy from `host1` to `host1` (`remote_src=yes`)
+
+```bash
+ansible host1 -m copy -a "src=/root/dhaka/file1 dest=/opt/ remote_src=yes"
+```
+
+#### Copy from `host1` to `ControlNode` (`fetch module`)
+
+```bash
+ansible host1 -m fetch -a "src=/root/backup/file1 dest=./"
+
+ansible host1 -m fetch -a "src=/etc/hosts dest=./"
+ansible all -m fetch -a "src=/etc/hosts dest=./"
+ls -l host1, host2
+
+ansible host1 -m fetch -a "src=/etc/hosts dest=./ flat=yes"  # Only file will be copy
+ansible all -m fetch -a "src=/etc/hosts dest=./ flat=yes"  # Firstly copy from host1, the overwrite by host2.
+
+
 ```
 
 
