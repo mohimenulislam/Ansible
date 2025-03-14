@@ -98,14 +98,24 @@ ansible host1 -m copy -a "src=/root/dhaka/file1 dest=/opt/ remote_src=yes"
 ```bash
 ansible host1 -m fetch -a "src=/root/backup/file1 dest=./"
 
-ansible host1 -m fetch -a "src=/etc/hosts dest=./"
+ansible host1 -m fetch -a "src=/etc/hosts dest=./"  # copy with directory structure
+
 ansible all -m fetch -a "src=/etc/hosts dest=./"
 ls -l host1, host2
 
-ansible host1 -m fetch -a "src=/etc/hosts dest=./ flat=yes"  # Only file will be copy
+ansible host1 -m fetch -a "src=/etc/hosts dest=./ flat=yes"  # Only file will be copy.
 ansible all -m fetch -a "src=/etc/hosts dest=./ flat=yes"  # Firstly copy from host1, the overwrite by host2.
-
-
 ```
 
+#### Copy from `host1` to `host2`
 
+```bash
+ansible host1 -m fetch -a "src=/etc/hosts dest=./"   # Copy from host1 to ControlNode
+ansible host2 -m copy -a "src=/home/devuser1/myproject/host1 dest=/backup/"  # Copy from ControlNode to host2
+``` 
+
+## Shell Module
+
+```bash
+ansible host1 -m shell -a 'echo $HOSTNAME'
+```
