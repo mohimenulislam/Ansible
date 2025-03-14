@@ -119,3 +119,22 @@ ansible host2 -m copy -a "src=/home/devuser1/myproject/host1 dest=/backup/"  # C
 ```bash
 ansible host1 -m shell -a 'echo $HOSTNAME'
 ```
+
+## File Module 
+
+The `file` module in Ansible is used to manage files, directories, and symbolic links on remote hosts. You can use it to create, delete, or modify file permissions.
+
+```bash
+ansible-doc file
+```
+
+## `yum_repository` Module
+
+The `yum_repository module` in Ansible is used to manage YUM repositories on RHEL-based systems (Red Hat, CentOS, Rocky Linux, AlmaLinux, etc.). It allows you to add, update, or remove repositories.
+
+## Yum Module
+The `yum` module in Ansible is used to manage packages on RHEL-based systems (Red Hat, CentOS, Rocky Linux, AlmaLinux, etc.). It allows you to install, remove, and update packages using YUM.
+
+## Service Module
+
+The `service` module in Ansible is used to manage services on Linux systems. It allows you to start, stop, restart, enable, or disable services, making it essential for system administration tasks.
