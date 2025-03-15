@@ -124,9 +124,49 @@ ansible host1 -m shell -a 'echo $HOSTNAME'
 
 The `file` module in Ansible is used to manage files, directories, and symbolic links on remote hosts. You can use it to create, delete, or modify file permissions.
 
+- create file/dir
+- delete file/dir
+- change/modify file permission
+- change/modify owner/group ownership
+- create soft/hard link
+- delete soft/hard link
+- TimeStampUpdate
+
+**Arguments in File Module:** 
+- path: In the Ansible file module, the path argument specifies the file or directory on which the operation should be performed. Ex: /opt/file1
+- src: The src argument in the Ansible file module is used when setting `symbolic links`. It defines the target path to which the symlink should point.
+- dest
+- group
+- mode: 777, u+r
+- recurce: yes, no
+- state
+ - touch: create a blank file
+ - directory: create a directory
+ - absent: The absent argument in the Ansible file module is used with the state parameter to `remove` files, directories, or symlinks.
+ - link: Soft Link
+ - hard: Hard Link 
+
 ```bash
 ansible-doc file
 ```
+
+#### Create and delete files and directories.
+
+```bash
+ansible host1 -m file -a "path=/backup state=directory"  # Create a directory /backup
+ansible host1 -m file -a "path=/backup/file1 state=touch"  # Create a file under /backup directory
+
+ansible host1 -m file -a "path=/backup/file1 state=absent"  # Delete file1
+ansible host1 -m file -a "path=/backup state=absent"  # Delete backup directory
+```
+
+#### Uses of Mode
+
+```bash
+ansible host1 -m file -a "path=/backup state=directory owner=devops group=wheel mode=666
+ansible host1 -m file -a "path=/backup state=directory owner=devops group=wheel mode=u+rw"
+```
+
 
 ## `yum_repository` Module
 
