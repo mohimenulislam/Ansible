@@ -85,9 +85,10 @@ Run the conmmand
 ```bash
 ansible all -m ping 
 ```
-![image](https://github.com/mohimenulislam/Ansible/blob/4e4396e910b9d3ca7d36c9148f131acc22c26421/Img/devuser1.png)
+![image](https://github.com/mohimenulislam/Ansible/blob/09bd9b10cbae7fc029dfb3120c76b8f68e593428/Img/devuser1(1).png)
 
 Here, `devuser1` tries to log in to host1 and host2 as the `devops` user.
+
 
 ```bash
 vi myproject/ansible.cfg
@@ -96,16 +97,19 @@ vi myproject/ansible.cfg
   inventory=./inventory
   remote_user=devops
 
-ansible all -m ping
+[devuser1@controlnode myproject]$ ansible all -m ping -k
+
 ```
-![image](https://github.com/mohimenulislam/Ansible/blob/c629d2ac497517e62d2984f2f8ef8dc50b165220/Img/devops_user.png)
+![image](https://github.com/mohimenulislam/Ansible/blob/b74096c72d7dd8f952ae9a6ca4b9782d055489f6/Img/devuser1-k.png)
+
+#### To remove `-k`
 
 Generate key-base authentication (From Controlnode, devuser1). The `devops` user from host1 and host2 already has sudo privileges.
 
 ```bash
-ssh-keygen
-ssh-copy-id devops@host1
-ssh-copy-id devops@host2
+[devuser1@controlnode ~]$ ssh-keygen
+[devuser1@controlnode ~]$ ssh-copy-id devops@host1
+[devuser1@controlnode ~]$ ssh-copy-id devops@host2
 ansible all -m ping
 ```
 
