@@ -49,7 +49,8 @@ F4 = Which command will execute. `pavel ALL=(ALL) /usr/bin/ansitest` - here pave
 - `pavel ALL=(ALL) NOPASSWD: ALL`: - No passward required.
 - `pavel host1=(ALL) ALL`: - from `host1` user `pavel` can execute all `commands` as any `user`.
 - `pavel host1,host5=(ALL) ALL`: - from `host1` and `host5` user `pavel` can execute all `commands` as any `user`.
-- `pavel ALL=(alex) NOPASSWD: /usr/bin/ansitest `: - from any `host` user `pavel` can execute only `ansitest` command as user `alex`.
+- `pavel ALL=(alex) NOPASSWD: /usr/bin/ansitest `: - from any `host` user `pavel` can execute only `ansitest` command as user `alex`. (Pavel runs as Alex because ansitest is owned by Alex, so he needs to 'run as Alex' to execute the command)
+   
 - `pavel ALL=(alex) NOPASSWD: /usr/bin/ansitest, /usr/sbin/useradd`: - can execute `ansitest` and `useradd` command.
 - `%cisco ALL=(ALL) NOPASSWD: ALL`: - from any `host`, all user of `cisco` group can execute all `commands` as any `user`.
 - `pavel  ALL = alex:cisco ALL`: - from any system user `pavel` can execute all commands as a user `alex`, as a group `cisco`
