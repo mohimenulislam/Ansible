@@ -293,4 +293,10 @@ become_ask_pass=false
 ansible all -a hwclock
 ```
 
+#### If any error 
+
+```
+ansible all -a "hwclock --verbose" -u devops -k -b
+```
+
 
