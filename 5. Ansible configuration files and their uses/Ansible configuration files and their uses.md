@@ -86,6 +86,12 @@ ansible all --list-hosts -i myhost2
   inventory=/home/devops/myproject/myhost
 ```
 
+```
+[devuser1@controlnode myproject]$ ansible all -m ping
+```
+![image](https://github.com/mohimenulislam/Ansible/blob/a9fcead56a9113f1e683160ff3984c0b22f237f3/Img/fromdevuser1.png)
+
+
 #### We want `devuser1` to log in as the `devops` user on both `host1` and `host2`.
 
 ```
@@ -99,57 +105,32 @@ ansible all --list-hosts -i myhost2
 ```
 [devuser1@controlnode myproject]$ ansible all -m ping
 ```
-![image](https://github.com/mohimenulislam/Ansible/blob/a9fcead56a9113f1e683160ff3984c0b22f237f3/Img/fromdevuser1.png)
 
-
-
-
-
-
-
-Run the conmmand
-```bash
-ansible all -m ping 
-```
 ![image](https://github.com/mohimenulislam/Ansible/blob/09bd9b10cbae7fc029dfb3120c76b8f68e593428/Img/devuser1(1).png)
 
-Here, `devuser1` tries to log in to host1 and host2 as the `devops` user.
-
-
-```bash
-vi myproject/ansible.cfg
-
-  [defaults]
-  inventory=./inventory
-  remote_user=devops
-
+```
 [devuser1@controlnode myproject]$ ansible all -m ping -k
-
 ```
 ![image](https://github.com/mohimenulislam/Ansible/blob/b74096c72d7dd8f952ae9a6ca4b9782d055489f6/Img/devuser1-k.png)
 
-#### To remove `-k`
 
-Generate key-base authentication (From Controlnode, devuser1). The `devops` user from host1 and host2 already has sudo privileges.
-
-```bash
-[devuser1@controlnode ~]$ ssh-keygen
-[devuser1@controlnode ~]$ ssh-copy-id devops@host1
-[devuser1@controlnode ~]$ ssh-copy-id devops@host2
-ansible all -m ping
+#### But below command will not execute because the `devops` user does not have `sudo` privileges on `host1` and `host2`. Please grant `sudo` access to the `devops` user on both `host1` and `host2`.
+```
+[devuser1@controlnode myproject]$ ansible all -a hwclock -k
 ```
 
-![image](https://github.com/mohimenulislam/Ansible/blob/e2c738b3a09ed185048bb32cd95454313dd6aa0b/Img/ping.png)
-
-```bash
-ansible all -a hwclock
-ansible all -a hwclock -vvv
+#### After sudo privilege
 ```
-![image](https://github.com/mohimenulislam/Ansible/blob/03fbe334fa9291b9d4edb0c044a095e30335fa44/Img/hwclock.png)
+[devuser1@controlnode myproject]$ ansible all -a hwclock -k -b
+```
 
-Here, `devops` user become as `root`
-```bash
-vi myproject/ansible.cfg
+![image](https://github.com/mohimenulislam/Ansible/blob/154311448e750c5c5626ec67f1a94523dfa1df31/Img/hwclock1.png)
+
+#### To remove `-k` & `-b`
+
+**To avoid using the `-b` option, update the settings in ansible.cfg as shown below.**
+```
+[devuser1@controlnode myproject]$ vi ansible.cfg
 
   [defaults]
   inventory=./inventory
@@ -161,6 +142,25 @@ vi myproject/ansible.cfg
   become_method=sudo
   become_ask_pass=false
 ```
+
+**Avoid using the `-k` option by setting up SSH key-based access.**
+```bash
+[devuser1@controlnode ~]$ ssh-keygen
+[devuser1@controlnode ~]$ ssh-copy-id devops@host1
+[devuser1@controlnode ~]$ ssh-copy-id devops@host2
+```
+
+```
+[devuser1@controlnode myproject]$ ansible all -a hwclock
+```
+
+![image](https://github.com/mohimenulislam/Ansible/blob/4750f9d0606b3a301efb3817c630f62cd1032fef/Img/hwclock12.png)
+
+#### For check the verbose
+```
+[devuser1@controlnode myproject]$ ansible all -a hwclock -vv
+```
+
 
 ## Change `SSH` port 
 
