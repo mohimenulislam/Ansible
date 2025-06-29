@@ -201,7 +201,7 @@ firewall-cmd --list-all
 ssh -p 29 localhost
 ```
 
-Try to ssh 
+Try to ssh (From controlenode)
 ```bash
 ssh root@192.168.0.102 -p 29
 # or
@@ -209,13 +209,13 @@ ssh devops@192.168.0.102 -p 29
 ```
 
 ```bash
-ansible all -m ping
+[devuser1@controlnode myproject]$ ansible all -m ping
 ```
 ![image](https://github.com/mohimenulislam/Ansible/blob/584401c681ed6b1abde902ab44a9830cabbfeb84/Img/sshportchange.png)
 
 
 ```bash
-vi myproject/myhost
+[devuser1@controlnode myproject]$ vi myhost
 
   [webserver]
   host1
@@ -223,7 +223,7 @@ vi myproject/myhost
 ```
 
 ```bash
-ansible all -m ping
+[devuser1@controlnode myproject]$ ansible all -m ping
 ```
 ![image](https://github.com/mohimenulislam/Ansible/blob/909d8420de2204aae1cb337204ea0e1184135b04/Img/port29.png)
 
