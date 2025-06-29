@@ -55,16 +55,26 @@ su - devuser1
 Let say we have project named `myproject` and create `ansible.cfg` file under `myproject` directory.
 
 ```bash
-mkdir myproject
-cd myproject
-touch ansible.cfg
-ansible --version
+[devuser1@controlnode ~]$ mkdir myproject
+[devuser1@controlnode ~]$ cd myproject/
+[devuser1@controlnode myproject]$ touch ansible.cfg
+[devuser1@controlnode myproject]$ ansible --version
 ```
 
-Define host file 
+#### Define host file 
 
 ```bash
-touch myhost    # under myproject directory
+[devuser1@controlnode myproject]$ touch myhost
+[devuser1@controlnode myproject]$ ansible all --list-hosts  # Host file check 
+```
+
+#### We can also create multiple host file 
+```bash
+touch myhost2   # under myproject directory
+ansible all --list-hosts -i myhost2
+```
+
+```
 vi ansible.cfg
 
   [defaults]
@@ -75,11 +85,13 @@ vi ansible.cfg
   inventory=/home/devops/myproject/myhost
 ```
 
-We can also create multiple host file 
-```bash
-touch myhost2   # under myproject directory
-ansible all --list-hosts -i myhost2
 ```
+[devuser1@controlnode myproject]$ ansible all -m ping
+```
+![image](https://github.com/mohimenulislam/Ansible/blob/a9fcead56a9113f1e683160ff3984c0b22f237f3/Img/fromdevuser1.png)
+
+
+
 
 Run the conmmand
 ```bash
