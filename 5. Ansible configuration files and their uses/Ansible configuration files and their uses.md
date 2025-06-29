@@ -74,8 +74,9 @@ touch myhost2   # under myproject directory
 ansible all --list-hosts -i myhost2
 ```
 
+#### Define host file in ansible.cfg
 ```
-vi ansible.cfg
+[devuser1@controlnode myproject]$ vi ansible.cfg
 
   [defaults]
   inventory=myhost
@@ -85,10 +86,23 @@ vi ansible.cfg
   inventory=/home/devops/myproject/myhost
 ```
 
+#### We want `devuser1` to log in as the `devops` user on both `host1` and `host2`.
+
+```
+[devuser1@controlnode myproject]$ vi ansible.cfg
+
+  [defaults]
+  inventory=./myhost
+  remote_user=devops
+```
+
 ```
 [devuser1@controlnode myproject]$ ansible all -m ping
 ```
 ![image](https://github.com/mohimenulislam/Ansible/blob/a9fcead56a9113f1e683160ff3984c0b22f237f3/Img/fromdevuser1.png)
+
+
+
 
 
 
