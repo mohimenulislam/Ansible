@@ -118,6 +118,8 @@ ansible host2 -m copy -a "src=/home/devuser1/myproject/host1 dest=/backup/"  # C
 
 ```bash
 ansible host1 -m shell -a 'echo $HOSTNAME'
+ansible host1 -m shell -a "echo welcome > /backup/file1"
+ansible host1 -m shell -a "echo $HOSTNAME >> /backup/file1"
 ```
 
 ## File Module 
