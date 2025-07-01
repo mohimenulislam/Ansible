@@ -136,8 +136,8 @@ The `file` module in Ansible is used to manage files, directories, and symbolic 
 
 **Arguments in File Module:** 
 - path: In the Ansible file module, the path argument specifies the file or directory on which the operation should be performed. Ex: /opt/file1
-- src: The src argument in the Ansible file module is used when setting `symbolic links`. It defines the target path to which the symlink should point.
-- dest
+- src: The src argument in the Ansible file module is used when setting `symbolic links`. It defines the target path to which the symlink should point. (exact destinatin)
+- dest: (Where link will be created)
 - group
 - mode: 777, u+r
 - recurce: yes, no
