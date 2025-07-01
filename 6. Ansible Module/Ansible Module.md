@@ -163,6 +163,17 @@ ansible host1 -m file -a "path=/backup state=absent"  # Delete backup directory
 # watch ls -ld /backups # from host1
 ```
 
+#### Soft Link, Hard Link 
+
+```
+# Soft Link
+ansible host1 -m file -a "src=/backup/file1 dest=/opt/file1 state=link"  # Soft Link Create
+ansible host1 -m file -a "path=/opt/file1 state=absent"  # Link Delete
+
+# Hard Link
+ansible host1 -m file -a "src=/backup/file1 dest=/opt/file1 state=hard"
+```
+
 #### Uses of Mode
 
 ```bash
