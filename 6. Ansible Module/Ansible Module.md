@@ -160,6 +160,7 @@ ansible host1 -m file -a "path=/backup/file1 state=touch"  # Create a file under
 
 ansible host1 -m file -a "path=/backup/file1 state=absent"  # Delete file1
 ansible host1 -m file -a "path=/backup state=absent"  # Delete backup directory
+# watch ls -ld /backups # from host1
 ```
 
 #### Uses of Mode
