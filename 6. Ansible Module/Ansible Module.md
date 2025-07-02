@@ -186,9 +186,28 @@ ansible host1 -m file -a "path=/backup state=directory owner=devops group=wheel 
 
 The `yum_repository module` in Ansible is used to manage YUM repositories on RHEL-based systems (Red Hat, CentOS, Rocky Linux, AlmaLinux, etc.). It allows you to add, update, or remove repositories.
 
+```
+ansible host1 -m yum_repository -a "name=AppStream description='Packages from AppStream' baseurl=file:///software/AppStream"
+
+# repo delete 
+ansible host1 -m yum_repository -a "name=AppStream description='Packages from AppStream' baseurl=file:///software/AppStream state=absent" 
+
+# AppStream
+ansible host1 -m yum_repository -a "file=cdrom name=AppStream description='Packages from AppStream' baseurl=file:///software/AppStream gpgcheck=1 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release enabled=1"
+
+# BaseOS
+ansible host1 -m yum_repository -a "file=cdrom name=BaseOS description='Packages from BaseOS' baseurl=file:///software/BaseOS gpgcheck=1 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release enabled=1"
+```
+
 ## Yum Module
 The `yum` module in Ansible is used to manage packages on RHEL-based systems (Red Hat, CentOS, Rocky Linux, AlmaLinux, etc.). It allows you to install, remove, and update packages using YUM.
 
 ## Service Module
 
 The `service` module in Ansible is used to manage services on Linux systems. It allows you to start, stop, restart, enable, or disable services, making it essential for system administration tasks.
+
+I - Install 
+S - Start
+E - Enable
+F - Firewall/iptables/ufw
+T - Test
