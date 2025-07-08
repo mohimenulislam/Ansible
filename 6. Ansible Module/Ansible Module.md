@@ -80,7 +80,7 @@ ansible host1 -m copy -a "src=/home/devuser1/copy.txt dest=/opt/copy3.txt owner=
 #### Copy from `controlNode` to `host1`
 
 ```bash
- ansible host1 -m copy -a "src=/dhaka dest=/opt/"
+ansible host1 -m copy -a "src=/dhaka dest=/opt/"
 
 ansible host1 -m copy -a "src=/dhaka/file1 dest=/root/backup/"  # If the backup directory does not exist, it will be created.
 
@@ -206,8 +206,8 @@ The `yum` module in Ansible is used to manage packages on RHEL-based systems (Re
 
 The `service` module in Ansible is used to manage services on Linux systems. It allows you to start, stop, restart, enable, or disable services, making it essential for system administration tasks.
 
-I - Install 
-S - Start
-E - Enable
-F - Firewall/iptables/ufw
-T - Test
+- I - Install 
+- S - Start
+- E - Enable
+- F - Firewall/iptables/ufw
+- T - Test
