@@ -228,7 +228,7 @@ ansible all -m command -a "firewall-cmd --permanent --add-service=http"
 ansible all -m command -a "firewall-cmd --reload"
 
 
- ansible all -m copy -a  "src=/var/www/html/index.html dest=/var/www/html/"
+ansible all -m copy -a  "src=/var/www/html/index.html dest=/var/www/html/"
 
 [devuser1@controlnode myproject]$ curl 192.168.11.101
 
