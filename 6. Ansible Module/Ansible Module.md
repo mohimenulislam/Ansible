@@ -202,12 +202,42 @@ ansible host1 -m yum_repository -a "file=cdrom name=BaseOS description='Packages
 ## Yum Module
 The `yum` module in Ansible is used to manage packages on RHEL-based systems (Red Hat, CentOS, Rocky Linux, AlmaLinux, etc.). It allows you to install, remove, and update packages using YUM.
 
-## Service Module
-
-The `service` module in Ansible is used to manage services on Linux systems. It allows you to start, stop, restart, enable, or disable services, making it essential for system administration tasks.
-
 - I - Install 
 - S - Start
 - E - Enable
 - F - Firewall/iptables/ufw
 - T - Test
+
+
+  name: package <br/>
+  state: present <br/>
+         absent <br>
+         latest <br>
+
+#### Install Package
+```
+ansible all -m yum -a "name=httpd state=latest"
+ansible host1 -m command -a "systemctl status httpd"
+ansible all -m service -a "name=httpd state=started enabled=yes"
+ansible all -m command -a "systemctl status httpd"  #check
+
+
+ansible-doc -l | grep firewalld
+
+ansible all -m command -a "firewall-cmd --permanent --add-service=http"
+ansible all -m command -a "firewall-cmd --reload"
+
+
+ ansible all -m copy -a  "src=/var/www/html/index.html dest=/var/www/html/"
+
+[devuser1@controlnode myproject]$ curl 192.168.11.101
+
+```
+
+#### Remove Package
+
+## Service Module
+
+The `service` module in Ansible is used to manage services on Linux systems. It allows you to start, stop, restart, enable, or disable services, making it essential for system administration tasks.
+
+
