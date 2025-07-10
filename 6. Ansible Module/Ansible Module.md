@@ -273,6 +273,9 @@ ansible host1 -m firewalld -a "service=ftp state=disabled"
 ansible host1 -m firewalld -a "port=29/tcp state=enabled immediate=yes"
 ansible host1 -m firewalld -a "port=40-50/tcp state=enabled immediate=yes"
 
+
+ansible host1 -a "firewall-cmd --list-all"
+
 ```
 
 
