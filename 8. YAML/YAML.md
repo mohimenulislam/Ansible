@@ -46,4 +46,13 @@ Don't use  `Tab`
 [devuser1@controlnode myproject]$ ansible-playbook playbook.yaml --syntax-check
 [devuser1@controlnode myproject]$ ansible-playbook playbook.yaml -C   #dry run
 ```
+![image](https://github.com/mohimenulislam/Ansible/blob/db8ed79ec6873ceb816807511c78733535a94730/Img/playbook-c.png)
+
+changed: http not installed in `host1`
+
+Run plabook
+```
+[devuser1@controlnode myproject]$ ansible-playbook playbook.yaml
+```
+
 
