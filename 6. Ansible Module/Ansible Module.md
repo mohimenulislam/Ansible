@@ -199,8 +199,11 @@ ansible host1 -m yum_repository -a "file=cdrom name=AppStream description='Packa
 ansible host1 -m yum_repository -a "file=cdrom name=BaseOS description='Packages from BaseOS' baseurl=file:///software/BaseOS gpgcheck=1 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release enabled=1"
 ```
 
-## Yum Module
+## Yum Module & Service Module 
+
 The `yum` module in Ansible is used to manage packages on RHEL-based systems (Red Hat, CentOS, Rocky Linux, AlmaLinux, etc.). It allows you to install, remove, and update packages using YUM.
+
+The `service` module in Ansible is used to manage services on Linux systems. It allows you to start, stop, restart, enable, or disable services, making it essential for system administration tasks.
 
 - I - Install 
 - S - Start
@@ -219,7 +222,12 @@ The `yum` module in Ansible is used to manage packages on RHEL-based systems (Re
 ansible all -m yum -a "name=httpd state=latest"
 ansible host1 -m command -a "systemctl status httpd"
 ansible all -m service -a "name=httpd state=started enabled=yes"
+
 ansible all -m command -a "systemctl status httpd"  #check
+
+ansible host1 -m service -a "name=httpd state=stopped"
+ansible host1 -m service -a "name=httpd state=restarted"
+
 
 
 ansible-doc -l | grep firewalld
@@ -231,13 +239,41 @@ ansible all -m command -a "firewall-cmd --reload"
 ansible all -m copy -a  "src=/var/www/html/index.html dest=/var/www/html/"
 
 [devuser1@controlnode myproject]$ curl 192.168.11.101
+```
+
+```
+ansible-doc service
+```
+#### Remove Package
+
+#### Service 
+
+## Firewall
+#### Search on web `download ansible posix collection`
+```
+ansible --version
+ansible-galaxy collection install ansible.posix
+ansible --version
+
+cd /home/devuser1/.ansible/collections/
+
+/home/devuser1/.ansible/collections/ansible_collections/ansible/posix/plugins
+
+ansible-doc firewalld
+```
+
+```
+ansible host1 -m firewalld -a "service=ftp state=enabled"
+ansible host1 -m firewalld -a "service=ftp state=enabled permanent=yes"
+ansible host1 -m firewalld -a "service=ftp state=enabled permanent=yes immediate=yes"
+
+ansible host1 -m firewalld -a "service=ftp state=disabled"
+
+
+ansible host1 -m firewalld -a "port=29/tcp state=enabled immediate=yes"
+ansible host1 -m firewalld -a "port=40-50/tcp state=enabled immediate=yes"
 
 ```
 
-#### Remove Package
-
-## Service Module
-
-The `service` module in Ansible is used to manage services on Linux systems. It allows you to start, stop, restart, enable, or disable services, making it essential for system administration tasks.
 
 
