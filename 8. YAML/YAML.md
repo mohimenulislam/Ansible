@@ -4,10 +4,10 @@ Starting with `---`
 
 ```
 ---
-- name:    # play1
-  hosts:servera
+- name: Deploy Server    # play1
+  hosts: host1
   tasks:
-    - task1
+    - task1 >> name: Installink https package
     - task2
     - task3
 
@@ -17,5 +17,33 @@ Starting with `---`
     - task1
     - task2
     - task3
+```
+
+
+
+```
+
+[devuser1@controlnode myproject]$ vi playbook.yaml
+```
+Don't use  `Tab`
+```
+---
+- name: Deploy web Server    # play1 
+  hosts: host1
+  tasks:
+   - name: Installink httpd  #task1
+     yum: name=httpd state=latest
+   - name: Start & Enabled httpd service  #task2
+     service: name=httpd state=started enabled=yes
+   - name: Open service in firewalld  #task3
+     firewalld: service=http state=enabled permanent=yes immediate=yes
+
+```
+
+```
+
+[devuser1@controlnode myproject]$ ansible-playbook --help
+[devuser1@controlnode myproject]$ ansible-playbook playbook.yaml --syntax-check
+[devuser1@controlnode myproject]$ ansible-playbook playbook.yaml -C   #dry run
 ```
 
