@@ -55,4 +55,50 @@ Run plabook
 [devuser1@controlnode myproject]$ ansible-playbook playbook.yaml
 ```
 
+```
+---
+- name: Deptop httpd server
+  hosts: host1
+  tasks:
+   - name: Installing httpd
+     yum:
+      name: httpd
+      state: latest
+
+   - name: Start and enable httpd service
+     service:
+      name: httpd
+      state: started
+      enabled: yes
+
+   - name: Add hhtpd service in firewalld
+     firewalld:
+      service: http
+      state: enabled
+      permanent: yes
+      immediate: yes
+
+   - name: Copy Index File
+     copy:
+      src: /var/www/html/index.html
+      dest: /var/www/html/
+
+```
+
+Absent & copy file delete
+```
+--
+- name: Installing httpd web service
+  hosts: host1
+  tasks:
+   - name: Installing httpd
+     yum:
+      name: httpd
+      state: absent
+
+   - name: delete file
+     shell: |
+      rm -rf /var/www/html/index.html
+```
+
 
