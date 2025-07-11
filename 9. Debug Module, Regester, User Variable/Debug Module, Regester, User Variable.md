@@ -193,7 +193,7 @@ ansible-playbook vtest
 ```
 
 
-#### Group_Vars & Hosts_Vars
+### Hosts_Vars
 
 - create a directory name `host_vars` in `/home/devops/ansible/`
 - create a directiry name `servera` in `/home/devops/ansible/host_vars`
@@ -219,4 +219,55 @@ name: From-Host-Vars-Files
 ```
 ansible-playbook variable
 ```
-  
+
+
+### Group_Vars
+
+create a directory name group_vars in `/home/devops/ansible/`
+create a directiry name `dev`, `test` in `/home/devops/ansible/group_vars`
+create a file name `dev` in `/home/devops/ansible/group_vars/dev`
+
+In dev file
+```
+name: From-Group-Vars
+```
+
+```
+---
+- name:
+  hosts: servera
+  vars:
+  vars_files:
+  tasks:
+   - name: Testing value from variable
+     debug:
+      msg: "{{name}}"
+```
+```
+ansible-playbook variable
+```
+
+
+#### Inventory 
+
+From Inventory file 
+```
+[dev]
+servera name=From-Inventory
+```
+
+```
+---
+- name:
+  hosts: servera
+  vars:
+  vars_files:
+  tasks:
+   - name: Testing value from variable
+     debug:
+      msg: "{{name}}"
+```
+```
+ansible-playbook variable
+```
+
