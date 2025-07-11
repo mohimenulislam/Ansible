@@ -111,6 +111,35 @@ Variables provide a convenient way to manage dynamic values for a given environm
 
 ---
 
+Ansible allows you to define variables from various sources. Here’s a breakdown of common places where variables can be defined:
+
+1. **Command Line**
+
+2. **Inside `playbook.yaml`**
+```yaml
+vars:
+  name: pavel
+  roll: 6024
+```
+
+3. **External Variable Files**
+```yaml
+vars_files:
+  - file1
+  - ./file2
+  - /opt/file3
+```
+
+4. **Configuration and Host-Specific Files**
+- `/root/ansible/ansible.cfg`
+- `/root/ansible/host_vars/servera/vfile1.yaml`
+
+5. **Group-Specific Files**
+- `/root/ansible/group_vars/dev/dev.yaml`
+
+6. **Inventory File**
+- Define variables directly within the inventory.
+
 ### Naming Variables
 
 Variable names must start with a letter, and they can only contain letters, numbers, and underscores.
@@ -274,3 +303,5 @@ ansible-playbook variable
 
 #### CLI >> ExternalFile >> Playbok >> Host_vars >> Group_vars >> Inventory 
 #### Host_vars >> Group_Vars
+
+
