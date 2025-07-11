@@ -271,3 +271,6 @@ servera name=From-Inventory
 ansible-playbook variable
 ```
 
+
+#### CLI >> ExternalFile >> Playbok >> Host_vars >> Group_vars >> Inventory 
+#### Host_vars >> Group_Vars
