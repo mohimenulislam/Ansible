@@ -134,4 +134,89 @@ User-defined variables in Ansible can be defined in multiple ways. Below is a li
 3. **External Files** – separate YAML files loaded in the playbook  
 4. **group_vars** – group-specific variable files  
 5. **host_vars** – host-specific variable files  
-6. **Inventory File** – variables defined in the inventory itself  
+6. **Inventory File** – variables defined in the inventory itself
+
+
+
+```
+---
+- name:
+  hosts: servera
+  tasks:
+   - name: Testing value from variable
+     debug:
+      msg: "{{name}}"
+```
+``` 
+ansible-playbook variable.yml -e name=pathshala
+```
+```
+---
+- name:
+  hosts: servera
+  vars:
+   name: From-Play-Book
+  tasks:
+   - name: Testing value from variable
+     debug:
+      msg: "{{name}}"
+```
+```
+ansible-playbook variable.yml 
+ansible-playbook variable.yml -e name=from-cli # it will execute command
+```
+
+#### Create two file `vtest` & vfile in `/home/devops/ansible/`
+In `vtest` file
+```
+---
+- name:
+  hosts: servera
+  vars:
+   name: From-Play-Book
+  vars_files:
+   - /home/devops/ansible/vfile1
+  tasks:
+   - name: Testing value from variable
+     debug:
+      msg: "{{name}}"
+```
+
+In `vfile1`
+```
+---
+name: FROM-EXTERNEL-FILE
+```
+
+```
+ansible-playbook vtest
+```
+
+
+#### Group_Vars & Hosts_Vars
+
+- create a directory name `host_vars` in `/home/devops/ansible/`
+- create a directiry name `servera` in `/home/devops/ansible/host_vars`
+- create a file name `servera` in `/home/devops/ansible/host_vars/servera`
+
+In `servera` file
+```
+name: From-Host-Vars-Files
+```
+
+/home/devops/ansible/variable.yaml 
+```
+---
+- name:
+  hosts: servera
+  vars:
+  vars_files:
+  tasks:
+   - name: Testing value from variable
+     debug:
+      msg: "{{name}}"
+```
+```
+ansible-playbook variable
+```
+  
