@@ -46,6 +46,51 @@ ansible-playbook debug.yml -vv
 ansible-playbook debug.yml -vvv
 ```
 
+```
+---
+- name: Debuging
+  hosts: servera
+  tasks:
+   - name: Execute shell script to count user in servera
+     shell: wc -l /etc/passwd
+     register: myresult
+
+   - name: Debug something
+     debug:
+      msg: "{{myresult}}"
+```
+
+Starting time
+```
+---
+- name: Debuging
+  hosts: servera
+  tasks:
+   - name: Execute shell script to count user in servera
+     shell: whoami
+     register: myresult
+
+   - name: Debug something
+     debug:
+      msg: "{{myresult.start}}"
+```
+
+```
+---
+- name: Debuging
+  hosts: servera
+  tasks:
+   - name: Execute shell script to count user in servera
+     shell: whoami
+     register: myresult
+
+   - name: Debug something
+     debug:
+      msg:
+       - "{{myresult.start}}"
+       - "{{myresult.stdout}}"
+
+```
 
 
 After Local Login: `/etc/motd`
