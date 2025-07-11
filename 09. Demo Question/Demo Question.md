@@ -11,3 +11,8 @@
 #### Create a configuration file called /home/devops/ansible/ansible.cfg**
  - The **host inventory** file is `/home/devops/ansible/inventory`
  - The **location** of **role** used in **playbooks** include `/home/devops/ansible/roles`
+
+
+
+After Local Login: `/etc/motd`
+Before Login: `/etc/issue` >> Screen Dsplay
