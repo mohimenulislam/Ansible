@@ -32,6 +32,18 @@ ansible servera -m debug
 ---
 - name: Debuging
   hosts: servera
+  vars:
+   - text1: "Welcome to LP"
+  tasks:
+   - name: Debuging Something
+     debug:
+      msg: "{{ text1 }}"
+```
+
+```
+---
+- name: Debuging
+  hosts: servera
   tasks:
    - name: Execute shell script to count user in servera
      shell: wc -l /etc/passwd
