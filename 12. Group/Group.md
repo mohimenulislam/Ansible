@@ -1,5 +1,5 @@
 
-Group  >>   Primary (Private)
+Group  >>   Primary (Private) <br>
             Secondary (Suplimentary)
 
 A user must have a primary group.
