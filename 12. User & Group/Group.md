@@ -55,3 +55,29 @@ ansible servera -m group -a "name=cisco state=absent"
 
 
 ### Answer Question
+
+```
+[devops@workstation ansible]$ ansible servera -a "grep cisco /etc/group"
+```
+
+#### 01. Create user using playbook called user1.yaml
+
+    - Usernmae: user1
+    - password: centos321
+    - uid: 1050
+    - primaryGroup: user1
+   
+**Ans:** 
+
+
+#### 02. Create user using playbook called user2.yaml
+
+    - Usernmae: user2
+    - password: centos321
+    - uid: 1051
+    - shell: /bin/sh
+    - homeDirectory: /opt/user2
+    - primaryGroup: user2
+    - SecondaryGroup: cisco
+
+**Ans:**
