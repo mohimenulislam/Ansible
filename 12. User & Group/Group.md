@@ -7,35 +7,35 @@ user1 >> primary group
 
 
 #### User Module 
-```
+```bash
 ansible-doc user
 ansible-doc group
 ```
 
 #### Create User
-```
+```bash
 ansible servera -m user -a "name=mokles"
 ```
 
 #### Remove user
-```
+```bash
 ansible servera -m user -a "name=mokles state=absent"
 ```
 
 #### Remove user with home directory
-```
+```bash
 ansible servera -m user -a "name=mokles state=absent remove=yes"
 ```
 
 #### Assign multiple valus
 group->primary
 groups->Secondary
-```
+```bash
 ansible servera -m user -a "name=mokles state=present uid=1020  shell=/bin/sh comment=NetworkTeam groups=cisco"
 ```
 
 #### Assign user to another group.
-```
+```bash
 ansible servera -m user -a "name=mokes  groups=hpe append=yes" 
 ```
 
@@ -44,19 +44,19 @@ ansible servera -m user -a "name=mokes  groups=hpe append=yes"
 
 
 #### Create `cisco` group
-```
+```bash
 ansible servera -m group -a "name=cisco state=present"
 ```
 
 #### Delete `cisco` group
-```
+```bash
 ansible servera -m group -a "name=cisco state=absent"
 ```
 
 
 ### Answer Question
 
-```
+```bash
 [devops@workstation ansible]$ ansible servera -a "grep cisco /etc/group"
 ```
 
@@ -68,7 +68,7 @@ ansible servera -m group -a "name=cisco state=absent"
     - primaryGroup: user1
    
 **Ans:** 
-```
+```yaml
 ---
 - name: Create user1, pass, uid, primary group
   hosts: servera
@@ -95,7 +95,7 @@ ansible servera -m group -a "name=cisco state=absent"
 
 **Ans:**
 
-```
+```yaml
 ---
 - name: Create user1, pass, uid, primary group
   hosts: servera
@@ -144,7 +144,7 @@ userlist:
 #### 04. Create users using the the variables "userlist" from userlist.yaml file.. Playbook name should be multiuser1.yaml and password of all users should be TomBigBee.
 
 Create file name `multiuser1.yaml`
-```
+```yaml
 ---
 - name: Multiuser
   hosts: servera
