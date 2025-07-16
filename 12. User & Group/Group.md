@@ -68,7 +68,20 @@ ansible servera -m group -a "name=cisco state=absent"
     - primaryGroup: user1
    
 **Ans:** 
+```
+---
+- name: Create user1, pass, uid, primary group
+  hosts: servera
+  vars:
+   mypass: centos321
+  tasks:
+   - name: creating user1
+     user:
+      name: user1
+      uid: 1050
+      password: "{{ mypass | password_hash('sha512') }}"
 
+```
 
 #### 02. Create user using playbook called user2.yaml
 
@@ -81,3 +94,27 @@ ansible servera -m group -a "name=cisco state=absent"
     - SecondaryGroup: cisco
 
 **Ans:**
+
+```
+---
+- name: Create user1, pass, uid, primary group
+  hosts: servera
+  vars:
+   mypass: centos321
+  tasks:
+   - name: Creating Group
+     group:
+      name: cisco
+      state: present
+
+   - name: creating user1
+     user:
+      name: user1
+      uid: 1050
+      shell: /bin/bash
+      home: /opt/user2
+      password: "{{ mypass | password_hash('sha512') }}"
+      group: cisco
+      state: present
+      append: yes
+```
