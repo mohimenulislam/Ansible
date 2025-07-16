@@ -118,3 +118,46 @@ ansible servera -m group -a "name=cisco state=absent"
       state: present
       append: yes
 ```
+
+#### 03. Create a file userlist.yaml with below contents.
+
+    userlist:
+      - user10
+      - user11
+      - user12
+      - user13
+      - user14
+      - user15
+
+**Ans**
+Create file name `userlist.yaml`
+```
+userlist:
+ - user10
+ - user11
+ - user12
+ - user13
+ - user14
+ - user15
+```
+
+#### 04. Create users using the the variables "userlist" from userlist.yaml file.. Playbook name should be multiuser1.yaml and password of all users should be TomBigBee.
+
+Create file name `multiuser1.yaml`
+```
+---
+- name: Multiuser
+  hosts: servera
+  vars:
+   - mypass: TomBigBee
+  vars_files:
+   - ./userlist.yaml
+  tasks:
+   - name: Creteing multiuser
+     user:
+      name: "{{ item }}"
+      password: "{{ mypass | password_hash('sha512') }}"
+      state: present
+     with_items: "{{ userlist }}"
+
+```
