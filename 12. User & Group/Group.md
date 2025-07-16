@@ -161,3 +161,53 @@ Create file name `multiuser1.yaml`
      with_items: "{{ userlist }}"
 
 ```
+
+#### 05. create a file userdetails.yaml with the below
+
+userinfo:
+  - name: devuser1
+    pass: dev321
+    shell: /bin/bash
+
+  - name: devuser2
+    pass: dev123
+    shell: /bin/bash
+    
+  - name: devuser3
+    pass: pass321
+    shell: /sbin/nologin
+
+**Ans:**
+Create a filne name `userdetails.yaml`
+```
+userinfo:
+  - name: devuser1
+    pass: dev321
+    shell: /bin/bash
+
+  - name: devuser2
+    pass: dev321
+    shell: /bin/bash
+
+  - name: devuser3
+    pass: pass321
+    shell: /sbin/nologin
+```
+
+#### 06. Create users using the the variables "userinfo" from userdetails.yaml file. Use all the items of variable while creating user. Playbook name should be multiuser2.yaml.
+
+Create a file name `multiuser2.yaml`
+```yaml
+---
+- name: Creating multiuser
+  hosts: servera
+  vars_files:
+   - ./userdetails.yaml
+  tasks:
+   - name: Creating module
+     user:
+       name: "{{ item.name }}"
+       shell: "{{ item.shell }}"
+       password: "{{ item.pass | password_hash('sha256') }}"
+     loop: "{{ userinfo }}"
+```
