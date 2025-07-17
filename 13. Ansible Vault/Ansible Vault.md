@@ -32,7 +32,7 @@ chmod 600 .secret.txt
 ansible-vault create sample.secret --vault-password-file=./.secret.txt
 ```
 
-#### Ansible vault modify 
+#### Ansible vault edit
 
 ```
 ansible-vault edit sample.secret # (required password)
