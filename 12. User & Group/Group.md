@@ -163,7 +163,7 @@ Create file name `multiuser1.yaml`
 ```
 
 #### 05. create a file userdetails.yaml with the below
-
+```
 userinfo:
   - name: devuser1
     pass: dev321
@@ -176,7 +176,7 @@ userinfo:
   - name: devuser3
     pass: pass321
     shell: /sbin/nologin
-
+```
 **Ans:**
 Create a filne name `userdetails.yaml`
 ```
