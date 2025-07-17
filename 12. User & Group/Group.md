@@ -211,3 +211,4 @@ Create a file name `multiuser2.yaml`
        password: "{{ item.pass | password_hash('sha256') }}"
      loop: "{{ userinfo }}"
 ```
+  
