@@ -8,7 +8,7 @@ Ansible Vault is a feature of Ansible that allows you to encrypt sensitive data 
 - password can be stored into file
 
 ```bash
-ansible-vault create sample.secret # Create ansible-vault, type something
+ansible-vault create sample.secret   # Created   ansible-vault, type something
 cat sample.secret  # text will be encrypted 
 ansible-vault view sample.secret  # View
 ```
@@ -38,4 +38,17 @@ ansible-vault create sample.secret --vault-password-file=./.secret.txt
 ansible-vault edit sample.secret # (required password)
 # or
 ansible-vault edit sample.secret --vault-password-file=./.secret.txt #(no password required)
+```
+
+#### Ansible vault Encrypt & Decryptx
+
+**Encrypt**
+```
+ansible-vault encrypt existingfile.yaml    # write something
+cat existingfile.yaml
+```
+
+**Decrypt**
+```
+ansible-vault decrypt existingfile.yaml
 ```
