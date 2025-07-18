@@ -6,6 +6,9 @@ Ansible Vault is a feature of Ansible that allows you to encrypt sensitive data 
 - create new encrypted file
 - encrypt existing file
 - password can be stored into file
+```
+ansible-vault --help
+```
 
 ```bash
 ansible-vault create sample.secret   # Created   ansible-vault, type something
@@ -19,7 +22,7 @@ Here vault password saved in `.secret.txt`
 ```
 echo pass321 > .secret.txt
 chmod 600 .secret.txt
-```
+``` 
 Here no password need to input
 ```
 ansible-vault view sample.secret --vault-password-file=./.secret.txt
@@ -51,4 +54,10 @@ cat existingfile.yaml
 **Decrypt**
 ```
 ansible-vault decrypt existingfile.yaml
+```
+
+#### Vault Password change
+
+```
+ansible-vault rekey sample.secret
 ```
