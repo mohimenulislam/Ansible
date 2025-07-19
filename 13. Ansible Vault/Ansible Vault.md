@@ -132,8 +132,27 @@ ansible-playbook welcomeprint.yaml -C
 
 
 #### If `welcomeprint.yaml` & `welcome.txt` file pass is different. And already password file mentioned in `ansible.cfg` file
+Then we can use `vault-identity_list`
 
-`welcomeprint.yaml` pass saved in `pass.txt` ; pass: 1234
+```yaml
+[defaults]
+inventory=/home/devops/ansible/inventory
+remote_user=devops
+vault_identity_list=./pass.txt,./welcomepass.txt
+[privilege_escalation]
+become=true
+mecome_method=sudo
+become_user=root
+become_ask_pass=false
+```
+
+```
+ansible-playbook welcomeprint.yaml -C 
+```
+
+
+**Another way <br>**
+`welcomeprint.yaml` pass saved in `pass.txt` ; pass: 1234 <br>
 `welcome.txt` pass saved in `welcomepass.txt` ; pass redhat
 
 
@@ -152,7 +171,14 @@ become_ask_pass=false
 
 ```
 ansible-playbook welcomeprint.yaml -C --vault-password-file=welcomepass.txt
+# or
+ansible-playbook welcomeprint.yaml -C --ask-vault-pass  # pass: redhat
 ```
+
+
+
+
+
 
 #### IF we create different password in new file, but password file already in `ansible.cgf` file
 ```bash
