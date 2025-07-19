@@ -219,6 +219,3 @@ ansible-vault view secret1 --vault-id sec1@./sec1.txt
 
 
 
-#### 
-
-
