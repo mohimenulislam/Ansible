@@ -129,3 +129,36 @@ Here file (welcomeprint.yaml, welcome.txt) both password have to same
 ```
 ansible-playbook welcomeprint.yaml -C 
 ```
+
+
+#### If `welcomeprint.yaml` & `welcome.txt` file pass is different. And already password file mentioned in `ansible.cfg` file
+
+`welcomeprint.yaml` pass saved in `pass.txt` ; pass: 1234
+`welcome.txt` pass saved in `welcomepass.txt` ; pass redhat
+
+
+```yaml
+[defaults]
+inventory=/home/devops/ansible/inventory
+remote_user=devops
+vault_password_file=./pass.txt    # new
+
+[privilege_escalation]
+become=true
+mecome_method=sudo
+become_user=root
+become_ask_pass=false
+```
+
+```
+ansible-playbook welcomeprint.yaml -C --vault-password-file=welcomepass.txt
+```
+
+#### IF we create different password in new file, but password file already in `ansible.cgf` file
+```bash
+ansible-vault create barijabo --ask-vault-password     # getting error
+```
+
+
+
+
