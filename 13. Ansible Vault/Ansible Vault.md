@@ -180,11 +180,45 @@ ansible-playbook welcomeprint.yaml -C --ask-vault-pass  # pass: redhat
 
 
 
-#### IF we create different password in new file, but password file already in `ansible.cgf` file
+####  Ansible vault-is
+**IF we create different password in new file, but password file already in `ansible.cgf` file**
+
 ```bash
 ansible-vault create barijabo --ask-vault-password     # getting error
 ```
 
+**using `vault-id`**
+```
+ansible-vault create secret1 --vault-id sec1@prompt --encrypt-vault-id sec1
+```
+**We can keep vault-id same for multile file**
+```bash
+ansible-vault create secret2 --vault-id sec1@prompt --encrypt-vault-id sec1
 
+# view
+ansible-vault view secret1 --vault-id sec1@prompt
+ansible-vault view secret2 --vault-id sec1@prompt
+```
+
+**To check vault id**
+```
+cat secret1
+```
+**View `secret1` file**
+```
+ansible-vault view secret1 --ask-vault-pass
+# or
+ansible-vault view secret1 --vault-id sec1@prompt
+```
+
+**If password saved in another file**
+password saves in `sec1` file
+```
+ansible-vault view secret1 --vault-id sec1@./sec1.txt
+```
+
+
+
+#### 
 
 
