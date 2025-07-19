@@ -40,7 +40,7 @@ ansible-playbook usercreate1.yaml -C
 
 
 Or (Only applicable for `AND` operation)
-```
+```yaml
 ---
 - name: Creating user
   hosts: all
@@ -74,3 +74,25 @@ ansible-playbook usercreate1.yaml -C
 - user 'devadm1' should be created in dev hostgroup
 - user 'testadm1' should be created in test hostgroup.
 
+**Background study**
+**fixed variable check**
+```bash
+ansible servera -m debug -a "var=ansible_host"    # fixed variable
+ansible servera -m debug -a "var=ansible_jonjalipara"  # not define
+```
+```
+---yaml
+- name: servera
+  hosts: servera
+  tasks:
+   - name: Debug
+     debug:
+      var: vars
+```
+
+```bash
+ansible-playbook debugmsg.yaml -C # pint all variable
+```
+```bash
+ansible-playbook debugmsg.yaml | grep group_names
+```
