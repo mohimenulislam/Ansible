@@ -84,4 +84,6 @@ ARCH= {{ ansible_architecture }}
 
 
 ### handlers
+If there is new content in index.html then httpd service will restarted <br>
+*** `handlers` is a task is will execute when `notify` will informed.
 
