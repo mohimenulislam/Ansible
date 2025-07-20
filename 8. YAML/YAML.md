@@ -2,7 +2,7 @@
 
 Starting with `---` 
 
-```
+```yaml
 ---
 - name: Deploy Server    # play1
   hosts: host1
@@ -21,12 +21,12 @@ Starting with `---`
 
 
 
-```
+```bash
 
 [devuser1@controlnode myproject]$ vi playbook.yaml
 ```
 Don't use  `Tab`
-```
+```yaml
 ---
 - name: Deploy web Server    # play1 
   hosts: host1
@@ -40,7 +40,7 @@ Don't use  `Tab`
 
 ```
 
-```
+```bash
 
 [devuser1@controlnode myproject]$ ansible-playbook --help
 [devuser1@controlnode myproject]$ ansible-playbook playbook.yaml --syntax-check
@@ -51,11 +51,11 @@ Don't use  `Tab`
 changed: http not installed in `host1`
 
 Run plabook
-```
+```bash
 [devuser1@controlnode myproject]$ ansible-playbook playbook.yaml
 ```
 
-```
+```yaml
 ---
 - name: Deptop httpd server
   hosts: host1
@@ -86,8 +86,8 @@ Run plabook
 ```
 
 Absent & copy file delete
-```
---
+```yaml
+---
 - name: Installing httpd web service
   hosts: host1
   tasks:
