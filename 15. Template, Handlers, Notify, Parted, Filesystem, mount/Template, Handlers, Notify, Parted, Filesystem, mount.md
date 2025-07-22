@@ -1,4 +1,6 @@
 ### Template Module
+In Ansible, the template module is used to copy Jinja2 template files (usually with a .j2 extension) from your local system (the control node) to the remote managed nodes. It allows you to dynamically generate configuration files or scripts by replacing placeholders with variables.
+
 
 ```bash
 ansible-doc template
@@ -84,7 +86,9 @@ ARCH= {{ ansible_architecture }}
 
 
 ### handlers
-If there is new content in index.html then httpd service will restarted <br>
+The handlers module in Ansible is used to run specific tasks only when something changes.
+
+If there is new content in `index.html` then `httpd` service will restarted <br>
 *** `handlers` is a task & it will execute when `notify` will informed.
 
 
