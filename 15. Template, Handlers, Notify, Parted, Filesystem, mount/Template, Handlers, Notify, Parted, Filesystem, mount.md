@@ -138,3 +138,56 @@ vi index.html
 ```
 
 
+
+### Mail 
+
+If not installed
+```bash
+ansible-galaxy collection install community.general
+ansible-doc mail
+```
+
+```
+yum install mailx
+#or
+tail -f /var/spool/mail/root
+#or
+mail
+```
+
+Create file `mail.yaml`
+```yaml
+---
+- name: Build Webserver
+  hosts: servera
+  tasks:
+   - name: Install httpd
+     yum:
+      name: httpd
+      state: present
+   - name: Start and enable httpd service
+     service:
+      name: httpd
+      state: started
+      enabled: true
+   - name: Allow http for all
+     firewalld:
+      service: http
+      state: enabled
+      immediate: yes
+      permanent: yes
+   - name: Copying index.html to servera
+     template:
+      src: ./index.html
+      dest: /var/www/html/index.html
+     notify:
+      - restart httpd
+
+  handlers:
+   - name: restart httpd
+     mail:
+      subject: index.html has been changed successfully......
+      delegate_to: localhost
+      name: httpd
+      state: restarted
+```
