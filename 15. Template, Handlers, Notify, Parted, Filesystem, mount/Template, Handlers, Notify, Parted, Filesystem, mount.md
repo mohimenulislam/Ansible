@@ -48,6 +48,13 @@ ARCH= {{ ansible_architecture }}
 
 ### Background study
 #### Installinh httpd package
+
+Create `servera.html` & `serverb.html` file and write something
+```bash
+vi servera.html
+vi serverb.html
+```
+
 ```yaml
 ---
 - name: Build Webserver
@@ -85,10 +92,49 @@ ARCH= {{ ansible_architecture }}
 ```
 
 
-### handlers
+### handlers & notify
 The handlers module in Ansible is used to run specific tasks only when something changes.
 
 If there is new content in `index.html` then `httpd` service will restarted <br>
 *** `handlers` is a task & it will execute when `notify` will informed.
+
+Create file `index.html` & write something
+```bash
+vi index.html
+```
+
+```yaml
+---
+- name: Build Webserver
+  hosts: servera
+  tasks:
+   - name: Install httpd
+     yum:
+      name: httpd
+      state: present
+   - name: Start and enable httpd service
+     service:
+      name: httpd
+      state: started
+      enabled: true
+   - name: Allow http for all
+     firewalld:
+      service: http
+      state: enabled
+      immediate: yes
+      permanent: yes
+   - name: Copying index.html to servera
+     template:
+      src: ./index.html
+      dest: /var/www/html/index.html
+     notify:
+      - restart httpd
+
+  handlers:
+   - name: restart httpd
+     service:
+       name: httpd
+       state: restarted
+```
 
 
