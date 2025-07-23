@@ -191,3 +191,56 @@ Create file `mail.yaml`
       name: httpd
       state: restarted
 ```
+
+### Parted, filesystem, mount
+- fstab
+- present >> add entry to /etc/fstab  
+- absent >> remove entry from /etc/fstab  
+- mounted >> add entry to /etc/fstab < if entry is not already there > and mount the volume 
+
+**Creating partition** 
+
+```yaml
+---
+- name: Creating Primary pertition
+  hosts: servera, serverb
+  tasks:
+    - name: Creating /dev/sda1
+      parted:
+       device: /dev/sda
+       number: 1
+       part_end: 200MiB
+       state: present
+    - name: Create FileSystem
+      filesystem:
+       dev: /dev/sda1
+       fstype: xfs
+    - name: Mounting Filesystem
+      mount:
+       src: /dev/sda1
+       path: /mnt/data
+       fstype: xfs
+       state: mounted
+```
+
+**Delete partition**
+```yaml
+---
+- name: Creating Primary pertition
+  hosts: servera, serverb
+  tasks:
+    - name: Creating /dev/sda1
+      parted:
+       device: /dev/sda
+       number: 1
+       part_end: 200MiB
+       state: absent
+
+  pre_tasks:
+   - name: Mounting Filesystem
+     mount:
+      src: /dev/sda1
+      path: /mnt/data
+      fstype: xfs
+      state: unmounted
+```
