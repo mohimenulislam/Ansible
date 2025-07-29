@@ -26,4 +26,111 @@ ansible-doc -l | grep lvg
 **From servera check**
 ```bash
 pvs
+vgs
 ```
+
+```bash
+[devops@workstation ansible]$ ansible servera -m lvol -a "vg=vg0 lv=lv1 size=200m state=present"
+```
+
+**From servera check**
+
+```bash
+lsblk /dev/vg0/lv1
+blkid /dev/vg0/lv1 # No filesystem
+```
+
+
+**Filesystem Create**
+```
+[devops@workstation ansible]$ ansible servera -m filesystem -a "device=/dev/vg0/lv1 fstype=xfs"
+```
+
+**From servera check**
+```bash
+blkid /dev/vg0/lv1
+```
+
+**Delete lvm**
+```bash
+[devops@workstation ansible]$ ansible servera -m lvol -a "vg=vg0 lv=lv1 state=absent force=yes"
+```
+
+**Delete vg & PV**
+```bash
+[devops@workstation ansible]$ ansible servera -m lvg -a "vg=vg0 state=absent"
+[devops@workstation ansible]$ ansible servera -a "pvremove /dev/sda"
+```
+
+**From servera check**
+```bash
+pvs
+vgs
+lvs
+```
+
+```yaml
+---
+- name: Creating LVM
+  hosts: servera
+  tasks:
+   - lvg:
+      vg: myvg1
+      pvs: /dev/sda
+      state: present
+      pesize: 8m
+
+   - lvol:
+      lv: lv1
+      vg: myvg1
+      size: 100m
+
+   - filesystem:
+      device: /dev/myvg1/lv1
+      fstype: xfs
+
+   - mount:
+      src: /dev/myvg1/lv1
+      path: data1
+      fstype: xfs
+      state: mounted
+```
+
+
+```bash
+ansible-playbook lv.yaml -C # may error
+ansible-playbook lv.yam
+```
+
+
+**lvresize**
+???
+
+
+
+### Background Study 
+Command two types:
+- ad-hok
+- playbook (yaml)
+
+### Ansible Role & Collection
+
+**Role**
+Ansible Role = Pre-defined folder structure + modular tasks
+- Reusability: Write once, reuse in many playbooks.
+- Organization: Break large playbooks into logical parts.
+- Scalability: Clean code separation for teams or big infrastructures.
+
+Role >> webserver
+Role >> dbserver
+
+ 
+**Ansible Collections**
+
+- module << copy, lvg >>
+- plugins << ansible_connections >>
+- role << -mysql, - dbrole >>
+
+
+A complete package of reusable Ansible automation components <br>
+Think of it like a Python package for Ansible — instead of installing just one role or module, you get an entire toolkit.
