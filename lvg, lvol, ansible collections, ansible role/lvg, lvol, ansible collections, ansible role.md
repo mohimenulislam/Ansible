@@ -134,3 +134,66 @@ Role >> dbserver
 
 A complete package of reusable Ansible automation components <br>
 Think of it like a Python package for Ansible — instead of installing just one role or module, you get an entire toolkit.
+
+
+```bash
+https://galaxy.ansible.com/
+```
+
+```bash
+[devops@workstation ansible]$ ansible-doc -l | wc -l
+man ansible-galaxy
+ansible-galaxy
+ansible-galaxy collection list
+ansible-galaxy role list
+```
+
+```bash
+mkdir collections
+```
+
+**For Ubuntu**
+```bash
+apt-cache madison ansible-core  
+```
+
+```bash
+ansible-galaxy collection install ansible.posix
+```
+![image](https://github.com/mohimenulislam/Ansible/blob/9daf3ce832e9786f4347a206c7a65d71d0524732/Img/ansible.posix.png)
+
+```bash
+ansible-galaxy collection list
+```
+
+**If we want to fix the path when download the ansible.posix**
+```bash
+ansible-galaxy collection install ansible.posix --force -p /home/devops/ansible/collections/
+```
+
+```yaml
+[defaults]
+inventory=/home/devops/ansible/inventory
+remote_user=devops
+#vault_password_file=./pass.txt
+#vault_identity_list=./pass.txt,./welcomepass.txt
+collection_path=/home/devops/ansible/collections/    # New line
+[privilege_escalation]
+become=true
+mecome_method=sudo
+become_user=root
+become_ask_pass=false
+
+```
+
+```bash
+ansible-doc -l | wc -l
+```
+
+**Offline ansible module download**
+
+Search on google `ansible posix download`
+download the `tarball`
+
+
+
